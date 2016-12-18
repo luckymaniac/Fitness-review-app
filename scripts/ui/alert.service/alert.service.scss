@@ -1,0 +1,15 @@
+@import '../../common/variables';
+
+md-toast {
+  &.md-success-toast-theme {
+    .md-toast-content {
+      background-color: $success-color;
+    }
+  }
+
+  &.md-error-toast-theme {
+    .md-toast-content {
+      background-color: $error-color;
+    }
+  }
+}

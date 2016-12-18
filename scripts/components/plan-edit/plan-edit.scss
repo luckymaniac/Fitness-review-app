@@ -1,0 +1,82 @@
+@import '../../common/variables';
+
+.etp-plan-edit {
+  .head {
+    .md-subheader {
+      background-color: $bg-color;
+    }
+
+    .toggle {
+      outline: none;
+      color: $primary-color;
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    .progress {
+      font-size: 12px;
+
+      span {
+        &.label {
+          font-weight: 700;
+        }
+
+        &.max {
+          color: $light-text-color;
+        }
+
+        &.average {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .new-plan {
+      .md-table {
+        .md-head {
+          tr {
+            height: 32px;
+          }
+        }
+
+        tr {
+          &:not(:first-child) {
+            .md-cell {
+              border-top: 0;
+            }
+          }
+
+          th,
+          .md-cell {
+            text-transform: capitalize;
+
+            &.label {
+              font-weight: 700;
+              font-size: 12px;
+              color: $dark-text-color;
+            }
+          }
+        }
+      }
+
+      md-input-container {
+        margin: 0;
+
+        .md-errors-spacer {
+          display: none;
+        }
+      }
+
+      .values {
+        label {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.plan-notes-dialog {
+  min-width: 360px;
+}

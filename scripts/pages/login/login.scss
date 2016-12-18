@@ -1,0 +1,18 @@
+@import '../../common/variables';
+
+.etp-login {
+  background-color: $primary-color;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+
+  .wrapper {
+    max-width: 100%;
+    width: 400px;
+
+    md-content {
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+  }
+}

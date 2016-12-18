@@ -1,0 +1,22 @@
+@import '../../common/variables';
+
+.etp-review-edit {
+  .notes-pad {
+    label {
+      padding-top: 8px;
+    }
+  }
+
+  md-input-container {
+    margin-top: 0;
+  }
+
+  .status {
+    color: $success-color;
+    font-weight: 700;
+
+    &.pending {
+      color: $warning-color;
+    }
+  }
+}

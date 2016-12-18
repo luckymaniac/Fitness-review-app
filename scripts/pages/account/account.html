@@ -1,0 +1,53 @@
+<etp-navbar></etp-navbar>
+<main>
+  <md-content flex layout-padding>
+    <h3 class="sub-title">Account Settings</h2>
+    <md-divider></md-divider>
+
+    <form name="$ctrl.accountForm" layout="column">
+      <div layout="row" layout-align="center">
+        <md-input-container class="md-block" flex>
+          <label>First Name</label>
+          <input ng-model="$ctrl.account.first_name" required>
+        </md-input-container>
+      </div>
+      <div layout="row"  layout-align="center">
+        <md-input-container class="md-block" flex=>
+          <label>Last Name</label>
+          <input ng-model="$ctrl.account.last_name" required>
+        </md-input-container>
+      </div>
+      <div class="actions" layout="row" layout-align="end">
+        <md-button class="etp-primary-button etp-large-button md-raised"
+                  ng-disabled="$ctrl.accountForm.$invalid || $ctrl.accountForm.$pristine"
+                  ng-click="$ctrl.updateAccount()">Update</md-button>
+        <md-button class="md-raised md-warn etp-large-button"
+                  ng-click="$ctrl.resetAccount()">Reset</md-button>
+      </div>
+    </form>
+
+    <h3 class="sub-title">Reset your password</h2>
+    <md-divider></md-divider>
+    <form name="$ctrl.passwordForm" layout="column">
+      <div layout="row" layout-align="center">
+        <md-input-container class="md-block" flex>
+          <label>Input Your New Password</label>
+          <input ng-model="$ctrl.accountPassword.password" type="password" required minLength="8">
+        </md-input-container>
+      </div>
+      <div layout="row"  layout-align="center">
+        <md-input-container class="md-block" flex>
+          <label>Confirm Your New Password</label>
+          <input ng-model="$ctrl.accountPassword.password_confirmation" type="password" required compare-to="$ctrl.accountPassword.password">
+        </md-input-container>
+      </div>
+      <div class="actions" layout="row" layout-align="end">
+        <md-button class="etp-primary-button etp-large-button md-raised"
+                  ng-disabled="$ctrl.passwordForm.$invalid || $ctrl.passwordForm.$pristine"
+                  ng-click="$ctrl.updatePassword()">Update</md-button>
+        <md-button class="md-raised md-warn etp-large-button"
+                  ng-click="$ctrl.resetPassword()">Reset</md-button>
+      </div>
+    </form>
+  </md-content>
+</main>

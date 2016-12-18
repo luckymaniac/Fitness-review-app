@@ -1,0 +1,35 @@
+<md-toolbar class="etp-navbar">
+  <div class="md-toolbar-tools" layout="row">
+    <div flex="20">
+      <etp-logo size="48"></etp-logo>
+    </div>
+    <div flex="60" layout layout-align="center center">
+      <span>{{ $ctrl.getTitle() }}</span>
+    </div>
+    <div flex="20" layout layout-align="end center">
+      <md-menu md-position-mode="target-right target" >
+        <md-button aria-label="Open demo menu" ng-click="$mdOpenMenu($event)" layout layout-align="center center">
+          <span>{{ $ctrl.getName() }}</span>
+          <i class="material-icons md-48">account_circle</i>
+        </md-button>
+
+        <md-menu-content width="4" >
+          <md-menu-item>
+            <md-button ui-sref="account">
+              <div layout="row" flex>
+                <p flex>Account Setting</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="$ctrl.logout()">
+              <div layout="row" flex>
+                <p flex>Log out</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+  </div>
+</md-toolbar>

@@ -1,0 +1,76 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import 'common/variables';
+
+body {
+  height: 100%;
+  margin: 0;
+  // browsers default to 16px for font-size,
+  // so setting top-level font-size to 62.5%
+  // scales 1rem to equal 10px.
+  font-family: 'Roboto', sans-serif;
+}
+
+.app {
+  height: 100%;
+  background-color: $bg-color;
+
+  md-content {
+    background-color: $bg-color;
+    padding: 20px;
+  }
+}
+
+
+.md-button {
+  &.etp-primary-button {
+    &:not([disabled]) {
+      color: $primary-color;
+      border-width: 1px;
+      border-color: $primary-color;
+      border-style: solid;
+
+      &.md-raised {
+        background-color: $primary-color;
+        color: $button-color;
+
+        &.md-focused,
+        &:hover {
+          background-color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &.etp-large-button {
+    font-size: 1.2rem;
+    min-height: 48px;
+    min-width: 124px;
+  }
+}
+
+a {
+  color: $nav-text-color;
+  text-decoration: none;
+}
+
+.sub-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+em {
+  color: $primary-color;
+}
+
+.values {
+  padding-bottom: 12px;
+
+  label {
+    font-weight: 700;
+  }
+}
+
+md-tooltip {
+  max-width: 200px;
+}

@@ -1,0 +1,97 @@
+<div class="etp-track-log">
+  <section class="header" layout="row" layout-align="space-between center">
+    <md-subheader>Tracking Log</md-subheader>
+  </section>
+  <section class="body">
+    <md-table-container>
+      <table md-table md-row-select="false">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>Date</th>
+            <th md-column>Proteins</th>
+            <th md-column>Carbs</th>
+            <th md-column>Fats</th>
+            <th md-column>Steps</th>
+            <th md-column>Sleep</th>
+            <th md-column>Calories</th>
+            <th md-column>Weight</th>
+        </thead>
+        <tbody md-body ng-repeat="item in $ctrl.dataRows" ng-class="item.type">
+          <tr ng-if="$ctrl.isMacroReview(item)">
+            <td colspan="8"  ng-class="{pending: item.pending}">
+              <div layout="row">
+                <span flex="90" flex-offset="5" layout layout-align="center center">
+                  REVIEW REQUESTED
+                </span>
+                <span flex="5" layout layout-align="center center">
+                  <a ui-sref="review(item)" class="btn-link">
+                    ?
+                    <md-tooltip>{{item.notes}}</md-tooltip>
+                  </a>
+                </span>
+              </div>
+            </td>
+          </tr>
+
+          <tr ng-if="$ctrl.isMacroPlan(item)" class="item-head">
+            <td colspan="8">
+              <div layout="row">
+                <span flex="5" layout layout-align="center center" ng-click="$ctrl.expandItem(item)">
+                  <i class="material-icons" ng-show="!item.isExpanded">keyboard_arrow_down</i>
+                  <i class="material-icons" ng-show="item.isExpanded">keyboard_arrow_up</i>
+                </span>
+                <span flex="90" layout layout-align="center center" ng-click="$ctrl.expandItem(item)">PLAN UPDATED</span>
+                <span flex="5" layout layout-align="center center">
+                  <a ui-sref="review(item)" class="btn-link">
+                    ?
+                    <md-tooltip>{{item.notes}}</md-tooltip>
+                  </a>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body super" ng-show="item.isExpanded">
+            <td md-cell>{{item.start_date | simpleDate}}</td>
+            <td md-cell>{{item.super_protein}}</td>
+            <td md-cell>{{item.super_carbs}}</td>
+            <td md-cell>{{item.super_fat}}</td>
+            <td md-cell colspan="4">SUPER</td>
+          </tr>
+          <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body high" ng-show="item.isExpanded">
+            <td md-cell></td>
+            <td md-cell>{{item.high_protein}}</td>
+            <td md-cell>{{item.high_carbs}}</td>
+            <td md-cell>{{item.high_fat}}</td>
+            <td md-cell colspan="4">HIGH</td>
+          </tr>
+          <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body medium" ng-show="item.isExpanded">
+            <td md-cell></td>
+            <td md-cell>{{item.medium_protein}}</td>
+            <td md-cell>{{item.medium_carbs}}</td>
+            <td md-cell>{{item.medium_fat}}</td>
+            <td md-cell colspan="4">MEDIUM</td>
+          </tr>
+          <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body low" ng-show="item.isExpanded">
+            <td md-cell></td>
+            <td md-cell>{{item.low_protein}}</td>
+            <td md-cell>{{item.low_carbs}}</td>
+            <td md-cell>{{item.low_fat}}</td>
+            <td md-cell colspan="4">LOW</td>
+          </tr>
+
+          <tr md-row  ng-if="$ctrl.isTrendRecord(item)">
+            <td md-cell>{{item.trend_date | simpleDate}}</td>
+            <td md-cell>{{item.protein}}</td>
+            <td md-cell>{{item.carbs}}</td>
+            <td md-cell>{{item.fat}}</td>
+            <td md-cell>{{item.steps}}</td>
+            <td md-cell>{{item.sleep_minutes | formatMinutes}}</td>
+            <td md-cell>{{item.calories_burned}}</td>
+            <td md-cell>{{item.weight}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </section>
+
+</div>

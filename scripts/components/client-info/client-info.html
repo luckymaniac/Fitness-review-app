@@ -1,0 +1,54 @@
+<div class="etp-client-info" layout-padding>
+  <section class="head" layout="row" layout-align="space-between center">
+    <md-subheader>{{$ctrl.client.first_name}} {{$ctrl.client.last_name}}'s Personal Info</md-subheader>
+    <span ng-click="$ctrl.toggle()">
+      <i class="material-icons" ng-show="!$ctrl.isExpanded">keyboard_arrow_down</i>
+      <i class="material-icons" ng-show="$ctrl.isExpanded">keyboard_arrow_up</i>
+    </span>
+  </section>
+
+  <md-divider></md-divider>
+
+  <section class="body" layout="column" ng-show="$ctrl.isExpanded" layout-padding>
+    <div layout="row">
+      <div flex="25" layout="column">
+        <div class="values" layout="row">
+          <label flex="40">Weight</label>
+          <span flex="60">{{$ctrl.client.bio.weight || 'Unknown'}} lbs</span>
+        </div>
+        <div class="values" layout="row">
+          <label flex="40">Height</label>
+          <span flex="60">{{$ctrl.client.bio.height | formatInch}}</span>
+        </div>
+      </div>
+      <div flex="25" flex-offset="5" layout="column">
+        <div class="values" layout="row">
+          <label flex="40">Body Fat</label>
+          <span flex="60"></span>
+        </div>
+        <div class="values" layout="row">
+          <label flex="40">Goal</label>
+          <span flex="60">{{$ctrl.goal.description}}</span>
+        </div>
+      </div>
+      <div flex="40" flex-offset="5" layout="column">
+        <div layout="column">
+          <div class="values">
+            <label>Activity Description</label>
+          </div>
+          <div class="values">
+            <span>{{$ctrl.client.setting.daily_activity}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="column">
+      <div class="values">
+        <label>Latest Note</label>
+      </div>
+      <div class="values">
+        <span flex="100">{{$ctrl.client.current_plan.notes}}</span>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,27 @@
+@import '../../common/variables';
+
+.reviews-page {
+  .md-row {
+    outline: none;
+
+    .actions {
+      text-align: center;
+      vertical-align: middle;
+
+      i {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .macro-review {
+    .status {
+      color: $success-color;
+      font-weight: 700;
+
+      &.pending {
+        color: $warning-color;
+      }
+    }
+  }
+}

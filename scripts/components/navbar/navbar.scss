@@ -1,0 +1,17 @@
+@import '../../common/variables';
+
+md-toolbar {
+  &.etp-navbar {
+    background-color: $primary-color;
+
+    .md-menu {
+      margin: 0;
+
+      .md-button {
+        span {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

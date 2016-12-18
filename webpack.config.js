@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ROOT_PATH = path.resolve(__dirname);
 
 module.exports = {
-    entry: "./scripts/main.js",
+    entry: "./scripts/app.js",
     output: {
         path: __dirname + '/build',
         filename: "bundle.js"
@@ -37,9 +37,15 @@ module.exports = {
     devServer:{
         historyApiFallback: true,
         inline: true
+        // ,contentBase: __dirname + '/build'
     },
     plugins: [
         // new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        new ExtractTextPlugin("styles.css")
+        new ExtractTextPlugin("styles.css"),
+        new webpack.ProvidePlugin({
+            _: 'lodash',
+            'window._': 'lodash',
+            moment: 'moment'
+        })
     ]
 };

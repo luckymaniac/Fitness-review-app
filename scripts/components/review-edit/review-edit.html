@@ -1,0 +1,55 @@
+<div class="etp-review-edit" layout-padding>
+  <div layout="row">
+    <h3 class="sub-title">
+      Review requested by <em>{{ $ctrl.macroReview.client.first_name }} {{ $ctrl.macroReview.client.last_name }}</em>
+    </h3>
+  </div>
+
+  <md-divider></md-divider>
+
+  <form name="$ctrl.reviewForm" layout="row">
+    <div layout="column" flex="50">
+      <div layout="row" class="values">
+        <label flex="30">Requested Date</label>
+        <span flex="70">{{ $ctrl.macroReview.request_date | date }}</span>
+      </div>
+      <div layout="row" class="values">
+        <label flex="30">Status</label>
+        <span flex="70" class="status" ng-class="{pending: $ctrl.macroReview.pending}">
+          {{ $ctrl.macroReview.pending ? 'Pending' : 'Updated on' }} {{ $ctrl.macroReview.review_date | simpleDate }}
+        </span>
+      </div>
+      <div layout="row" class="values">
+        <label flex="30">Reason</label>
+        <span flex="70">{{ $ctrl.macroReview.reason }}</span>
+      </div>
+    </div>
+    <div layout="column" flex="45" flex-offset="5">
+      <div layout="row" class="values">
+        <label flex="30">Review Date</label>
+        <span flex="70">{{ $ctrl.macroReview.review_date | date }}</span>
+      </div>
+      <div layout="row" class="values">
+        <label flex="30">Coach</label>
+        <span flex="70">{{ $ctrl.macroReview.coach.first_name }} {{ $ctrl.macroReview.coach.last_name }}</span>
+      </div>
+      <div layout="row" class="values notes-pad">
+        <label flex="30">Notes</label>
+        <md-input-container class="md-block" flex="70">
+          <textarea ng-model="$ctrl.notes"
+                    ng-disabled="!$ctrl.isEditable()"
+                    md-maxlength="500"
+                    required
+                    aria-label="macro-review-notes"
+                    rows="1"></textarea>
+        </md-input-container>
+      </div>
+      <div layout="row" layout-align="end">
+        <md-button class="md-raised etp-primary-button"
+                  ng-click="$ctrl.update()"
+                  ng-show="$ctrl.isEditable()"
+                  ng-disabled="$ctrl.reviewForm.$invalid || $ctrl.reviewForm.$pristine">Save</md-button>
+      </div>
+    </div>
+  </form>
+</div>

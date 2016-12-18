@@ -1,0 +1,92 @@
+@import '../../common/variables';
+
+.etp-track-log {
+  .header {
+    background-color: $light-bg-color;
+
+    .md-subheader {
+      background-color: $light-bg-color;
+    }
+  }
+
+  .body {
+    thead {
+      background-color: $light-bg-color;
+    }
+
+    tbody {
+      &.md-body {
+        &.macro-review {
+          tr {
+            td {
+              background-color: $alt-primary-color;
+              padding: 8px 0;
+              color: $dark-text-color;
+              font-weight: 700;
+
+              &.pending {
+                background-color: $primary-color;
+                color: $button-color;
+              }
+            }
+          }
+        }
+
+        &.macro-plan {
+          .item-head {
+            background-color: $secondary-color;
+            color: $button-color;
+            font-weight: 700;
+
+            td {
+              padding: 8px 0;
+
+              span {
+                outline: none;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .item-body {
+            background-color: $alt-secondary-color;
+
+            &.super {
+              td {
+                color: $secondary-color;
+              }
+            }
+
+            &.high {
+              td {
+                color: $high-text-color;
+              }
+            }
+
+            &.medium {
+              td {
+                color: $medium-text-color;
+              }
+            }
+
+            &.low {
+              td {
+                color: $low-text-color;
+              }
+            }
+          }
+        }
+
+        .btn-link {
+          display: block;
+          text-align: center;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          border: 2px solid $button-color;
+        }
+
+      }
+    }
+  }
+}

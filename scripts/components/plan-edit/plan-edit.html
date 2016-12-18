@@ -1,0 +1,95 @@
+<div class="etp-plan-edit" layout-padding>
+  <section class="head" layout="row">
+    <div flex="30">
+      <md-subheader>Weekly Average</md-subheader>
+    </div>
+    <div flex="65" flex-offset="5" layout="row" layout-align="space-between center">
+      <div flex layout="row">
+        <md-subheader>New Plan</md-subheader>
+        <md-button class="etp-primary-button" 
+                  ng-click="$ctrl.addNotes($event)"
+                  ng-disabled="!$ctrl.isEditable()">Add Note</md-button>
+        <md-button class="etp-primary-button md-raised" 
+                  ng-click="$ctrl.update()"
+                  ng-disabled="!$ctrl.isPlanUpdatable()">Update</md-button>
+      </div>
+      <span ng-click="$ctrl.toggle()" class="toggle">
+        <i class="material-icons" ng-show="!$ctrl.isExpanded">keyboard_arrow_down</i>
+        <i class="material-icons" ng-show="$ctrl.isExpanded">keyboard_arrow_up</i>
+      </span>
+    </div>
+  </section>
+
+  <md-divider></md-divider>
+
+  <section class="body" layout="row" ng-show="$ctrl.isExpanded">
+    <div flex="30" layout="column">
+      <div class="progress" layout="column" layout-padding>
+        <div layout="row" layout-align="space-between center">
+          <span class="label">PROTEINS</span>
+          <span layout="row">
+            <span class="average">{{$ctrl.average.protein}}</span>
+            <span class="max">/ {{$ctrl.max.protein}}g</span>
+          </span>
+        </div>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.protein / $ctrl.max.protein}}"></md-progress-linear>
+      </div>
+
+      <div class="progress" layout="column" layout-padding>
+        <div layout="row" layout-align="space-between center">
+          <span class="label">CARBS</span>
+          <span layout="row">
+            <span class="average">{{$ctrl.average.carbs}} </span>
+            <span class="max"> / {{$ctrl.max.carbs}}g</span>
+          </span>
+        </div>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.carbs / $ctrl.max.carbs}}"></md-progress-linear>
+      </div>
+
+      <div class="progress" layout="column" layout-padding>
+        <div layout="row" layout-align="space-between center">
+          <span class="label">FATS</span>
+          <span layout="row">
+            <span class="average">{{$ctrl.average.fat}} </span>
+            <span class="max"> / {{$ctrl.max.fat}}g</span>
+          </span>
+        </div>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.fat / $ctrl.max.fat}}"></md-progress-linear>
+      </div>
+    </div>
+    <div flex="65" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
+      <div class="values" layout="row">
+        <label layout layout-align="begin center">Start Date:</label>
+        <span flex="70" flex-offset="5">
+          <md-datepicker ng-model="$ctrl.plan.start_date" md-placeholder="Enter start date" md-min-date="$ctrl.today"></md-datepicker>
+        </span>
+      </div>
+      <md-table-container>
+        <table md-table md-row-select="false">
+          <thead md-head>
+            <tr md-row>
+              <th md-column></th>
+              <th md-column ng-repeat="level in $ctrl.levels">{{level}}</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="prop in $ctrl.props" ng-class="level">
+              <td md-cell class="label">{{prop}}</td>
+              <td md-cell ng-repeat="level in $ctrl.levels">
+                <md-input-container>
+                  <input ng-model="$ctrl.plan[$ctrl.planKey(level, prop)]" 
+                        ng-disabled="!$ctrl.isEditable()"
+                        type="number" 
+                        min="{{$ctrl.minValue(level, prop)}}" 
+                        max="{{$ctrl.maxValue(level, prop)}}" 
+                        aria-label="{{$ctrl.planKey(level, prop)}}"
+                        required>
+                </md-input-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </div>
+  </section>
+</div>

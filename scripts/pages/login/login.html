@@ -1,0 +1,26 @@
+<main class='etp-login' layout layout-align="center center">
+  <div class="wrapper" layout="column">
+    <etp-logo size="160"></etp-logo>
+    <md-content flex layout-padding>
+      <form layout="column" name="$ctrl.loginForm">
+        <md-input-container>
+          <label>Email</label>
+          <input ng-model="$ctrl.user.email" name="email" type="email" required>
+        </md-input-container>
+        <md-input-container>
+          <label>Password</label>
+          <input ng-model="$ctrl.user.password" type="password" required>
+        </md-input-container>
+        <section layout="row" layout-align="center center">
+          <md-button  type="submit" 
+                      class="md-raised etp-primary-button etp-large-button" 
+                      ng-disabled="$ctrl.loginForm.$invalid"
+                      ng-click="$ctrl.login()">Login</md-button>
+        </section>
+      </form>
+    </md-content>
+    <div layout="row" layout-align="center">
+      <a ui-sref="about">Forgot Password?</a>
+    </div>
+  </div>
+</main>

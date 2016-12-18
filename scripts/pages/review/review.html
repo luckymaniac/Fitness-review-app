@@ -1,0 +1,9 @@
+<etp-navbar></etp-navbar>
+<main class="review-page">
+  <md-content>
+    <etp-review-edit macro-review="$ctrl.macro_review"
+                    on-update="$ctrl.onUpdate($event)"></etp-review-edit>
+
+    <etp-track-log client="$ctrl.macro_review.client"></etp-track-log>
+  </md-content>
+</main>

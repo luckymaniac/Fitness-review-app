@@ -1,0 +1,72 @@
+<etp-navbar></etp-navbar>
+<main class="reviews-page">
+  <md-content>
+    <etp-main-menu></etp-main-menu>
+
+    <div layout="row">
+      <div flex="30" layout>
+        <h3 class="sub-title">Reviews</h3>
+      </div>
+      <div flex="30">
+        <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
+      </div>
+      <div flex="10" flex-offset="30">
+        <md-select ng-model="$ctrl.query.scope" aria-label="scope">
+          <md-option value="all">Show All</md-option>
+          <md-option value="pending">Pending</md-option>
+          <md-option value="reviewed">Reviewed</md-option>
+        </md-select>
+      </div>
+    </div>
+
+    <md-table-container>
+      <table md-table md-row-select="false" md-progress="$ctrl.promise">
+        <thead md-head md-order="query.order" md-on-reorder="$ctrl.onOrder">
+          <tr md-row>
+            <th md-column md-order-by="request_date"><span>Date</span></th>
+            <th md-column><span>Name</span></th>
+            <th md-column><span>Last Review</span></th>
+            <th md-column><span>Review Reason</span></th>
+            <th md-column><span>Status</span></th>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="item in $ctrl.macro_reviews" ng-click="$ctrl.onSelect(item)" class="macro-review">
+            <td md-cell>{{item.request_date | simpleDate}}</td>
+            <td md-cell>{{item.client.first_name}} {{item.client.last_name}}</td>
+            <td md-cell>{{item.client.last_review.review_date | simpleDate}}</td>
+            <td md-cell>{{item.reason}}</td>
+            <td md-cell>
+              <span class="status" ng-class="{pending: item.pending}">
+                {{item.pending ? "Pending" : "Updated on"}} {{item.review_date | simpleDate}}
+              </span>
+            </td>
+            <td md-cell class="actions">
+              <span ng-if="item.pending">
+                <md-button ui-sref="review({id: item.id})"
+                          class="etp-primary-button"
+                          aria-label="reply">Reply</md-button>
+              </span>
+              <span ng-if="!item.pending">
+                <md-button ui-sref="review({id: item.id})"
+                          class="md-icon-button"
+                          aria-label="review">
+                  <i class="material-icons">
+                    sms
+                    <md-tooltip>{{item.notes}}</md-tooltip>
+                  </i>
+                </md-button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="$ctrl.query.size"
+          md-limit-options="[10, 15, 20]"
+          md-page="$ctrl.query.page"
+          md-total="{{$ctrl.total}}" 
+          md-on-paginate="$ctrl.onPaginate" 
+          md-page-select></md-table-pagination>
+  </md-content>
+</main>
