@@ -9,10 +9,7 @@ class LoginController {
   }
 
   init() {
-    this.user = {
-      email: "coach1@mail.com",
-      password: "password"
-    };
+    this.user = {};
   }
 
   login() {

@@ -34,6 +34,8 @@
     "style-loader": "^0.13.0"
   },
   "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
