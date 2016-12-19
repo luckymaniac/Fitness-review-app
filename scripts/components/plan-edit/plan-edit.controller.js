@@ -69,26 +69,6 @@ class PlanEditController {
     return `${level}_${prop}`;
   }
 
-  minValue(level, prop) {
-    const minIndex = this.levels.indexOf(level) - 1;
-    if (minIndex < 0) {
-      return 0;
-    } else {
-      const minLevel = this.levels[minIndex];
-      return this.plan[this.planKey(minLevel, prop)];
-    }
-  }
-
-  maxValue(level, prop) {
-    const maxIndex = this.levels.indexOf(level) + 1;
-    if (maxIndex == this.levels.length) {
-      return this.max[prop];
-    } else {
-      const maxLevel = this.levels[maxIndex];
-      return this.plan[this.planKey(maxLevel, prop)];
-    }
-  }
-
   addNotes($event) {
     if (!this.plan) return;
     this._$mdDialog.show({

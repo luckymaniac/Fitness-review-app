@@ -80,8 +80,6 @@
                   <input ng-model="$ctrl.plan[$ctrl.planKey(level, prop)]" 
                         ng-disabled="!$ctrl.isEditable()"
                         type="number" 
-                        min="{{$ctrl.minValue(level, prop)}}" 
-                        max="{{$ctrl.maxValue(level, prop)}}" 
                         aria-label="{{$ctrl.planKey(level, prop)}}"
                         required>
                 </md-input-container>
