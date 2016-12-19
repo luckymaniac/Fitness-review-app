@@ -71,12 +71,15 @@ class TrackLogController {
     this._$scope.$apply();
   }
 
-  expandItem(item) {
+  togglePlan(item) {
     if (item.isExpanded) {
       item.isExpanded = false;
     } else {
-      _.each(this.dataRows, r => r.isExpanded = false);
-      item.isExpanded = true
+      this.dataRows.forEach(r => {
+        if (r.type === 'macro-plan') {
+          r.isExpanded = r.id === item.id;
+        }
+      });
     }
   }
 

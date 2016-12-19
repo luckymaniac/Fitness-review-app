@@ -36,11 +36,11 @@
           <tr ng-if="$ctrl.isMacroPlan(item)" class="item-head">
             <td colspan="8">
               <div layout="row">
-                <span flex="5" layout layout-align="center center" ng-click="$ctrl.expandItem(item)">
+                <span flex="5" layout layout-align="center center" ng-click="$ctrl.togglePlan(item)">
                   <i class="material-icons" ng-show="!item.isExpanded">keyboard_arrow_down</i>
                   <i class="material-icons" ng-show="item.isExpanded">keyboard_arrow_up</i>
                 </span>
-                <span flex="90" layout layout-align="center center" ng-click="$ctrl.expandItem(item)">PLAN UPDATED</span>
+                <span flex="90" layout layout-align="center center" ng-click="$ctrl.togglePlan(item)">PLAN UPDATED</span>
                 <span flex="5" layout layout-align="center center">
                   <a ui-sref="client($ctrl.client)" class="btn-link">
                     ?

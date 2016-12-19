@@ -19,14 +19,13 @@
         &.macro-review {
           tr {
             td {
-              background-color: $alt-primary-color;
+              background-color: $primary-color;
               padding: 8px 0;
-              color: $dark-text-color;
+              color: $button-color;
               font-weight: 700;
 
               &.pending {
-                background-color: $primary-color;
-                color: $button-color;
+                background-color: $warning-color;
               }
             }
           }
