@@ -79,6 +79,7 @@
                 <md-input-container>
                   <input ng-model="$ctrl.plan[$ctrl.planKey(level, prop)]" 
                         ng-disabled="!$ctrl.isEditable()"
+                        ng-blur="$ctrl.onChangePlan($ctrl.planKey(level, prop))";
                         type="number" 
                         min="0" 
                         max="{{$ctrl.max[prop]}}" 

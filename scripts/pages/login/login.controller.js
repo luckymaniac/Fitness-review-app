@@ -20,7 +20,8 @@ class LoginController {
         } else {
           this._AlertService.error(this._AppMessages.auth.login_failed);
         }
-      });
+      })
+      .catch(err => this._AlertService.error(this._AppMessages.auth.login_failed));
   }
 }
 

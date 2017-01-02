@@ -1,6 +1,15 @@
 <div class="etp-track-log">
   <section class="header" layout="row" layout-align="space-between center">
     <md-subheader>Tracking Log</md-subheader>
+    <md-subheader>
+      <md-button ng-click="$ctrl.prev()" class="md-icon-button">
+        <i class="material-icons">keyboard_arrow_left</i>
+      </md-button>
+      <span>{{$ctrl.months[$ctrl.query.month - 1]}} {{$ctrl.query.year}}</span>
+      <md-button ng-click="$ctrl.next()" ng-disabled="!$ctrl.isNextable()" class="md-icon-button">
+        <i class="material-icons">keyboard_arrow_right</i>
+      </md-button>
+    </md-subheader>
   </section>
   <section class="body">
     <md-table-container>

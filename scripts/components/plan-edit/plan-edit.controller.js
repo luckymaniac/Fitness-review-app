@@ -46,6 +46,13 @@ class PlanEditController {
       super_fat: 160
     };
 
+    this.initFields = [
+      ['super_protein', 'high_protein', 'medium_protein', 'low_protein'],
+      ['super_carbs', 'high_carbs'],
+      ['super_fat', 'low_fat'],
+      ['high_fat', 'medium_fat']
+    ];
+
     // initialize plan object
     this.plan = _.clone(this.client.current_plan || this.default_plan);
     this.plan.notes = '';
@@ -101,6 +108,16 @@ class PlanEditController {
     this.onUpdate({
       $event: object
     });
+  }
+
+  onChangePlan(key) {
+    const group = _.find(this.initFields, g => g.indexOf(key) >= 0);
+    if (group) {
+      group.forEach(k => {
+        this.plan[k] = this.plan[key];
+      });
+      _.remove(this.initFields, g => g.indexOf(key) >= 0);
+    }
   }
 }
 

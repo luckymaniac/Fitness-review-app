@@ -19,7 +19,7 @@ class TrackLogController {
       year: moment().year(),
       month: moment().month() + 1
     };
-    // this.
+    this.months = moment.monthsShort();
 
     this.load();
   }
@@ -93,6 +93,27 @@ class TrackLogController {
 
   isMacroPlan(item) {
     return item.type === 'macro-plan';
+  }
+
+  prev() {
+    let prev = moment().year(this.query.year).month(this.query.month - 1).date(1).subtract(1, 'month');
+    this.query.year = prev.year();
+    this.query.month = prev.month() + 1;
+
+    this.load();
+  }
+
+  next() {
+    let next = moment().year(this.query.year).month(this.query.month - 1).date(1).add(1, 'month');
+    this.query.year = next.year();
+    this.query.month = next.month() + 1;
+
+    this.load();
+  }
+
+  isNextable() {
+    const today = moment();
+    return !(today.year() === this.query.year && today.month() === this.query.month - 1);
   }
 }
 
