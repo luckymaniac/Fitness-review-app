@@ -2,8 +2,6 @@ class PlanNotesDialogController {
   constructor ($mdDialog, value) {
       this._$mdDialog = $mdDialog;
       this.notes = value;
-
-      console.log('>>', value);
   }
 
   cancel() {
