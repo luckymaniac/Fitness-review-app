@@ -158,6 +158,7 @@ class API {
   }
 
   getQueryParams(query) {
+    query = query || {};
     let params = _.clone(query);
     params.sort = null;
 

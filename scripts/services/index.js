@@ -12,6 +12,8 @@ import TrendRecordService from './trend_record.service';
 
 import GoalService from './goal.service';
 
+import MacroGoalService from './macro_goal.service';
+
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', [])
 
@@ -22,6 +24,8 @@ let servicesModule = angular.module('app.services', [])
 .service('MacroReview', MacroReviewService)
 
 .service('MacroPlan', MacroPlanService)
+
+.service('MacroGoal', MacroGoalService)
 
 .service('TrendRecord', TrendRecordService)
 

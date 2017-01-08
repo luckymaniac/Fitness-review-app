@@ -1,10 +1,11 @@
 import planNoteDialogTemplate from './plan-notes-dialog.html';
 
 class PlanEditController {
-  constructor($mdDialog, TrendRecord, AppConstants) {
+  constructor($mdDialog, TrendRecord, MacroGoal, AppConstants) {
     this._$mdDialog = $mdDialog;
     this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
+    this._MacroGoal = MacroGoal;
   }
 
   $onInit() {
@@ -43,7 +44,8 @@ class PlanEditController {
       low_fat: 50,
       medium_fat: 90,
       high_fat: 120,
-      super_fat: 160
+      super_fat: 160,
+      weekly_goals: 'MLHMMLS'
     };
 
     this.initFields = [
@@ -61,10 +63,16 @@ class PlanEditController {
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
       .then(res => {
         if (res.trend_records.length) {
-          this.average.each(this.average, (v, k) => {
-            this.average[k] = _floor(_.sumBy(res.trend_records, k) / this.trend_records.length);
+          _.each(this.average, (v, k) => {
+            this.average[k] = _.floor(_.sumBy(res.trend_records, k) / res.trend_records.length);
           });
         }
+      });
+    this._MacroGoal.list()
+      .then(res => {
+        this.macro_goals = res.macro_goals;
+        this.weeklyGoals = _.map(res.macro_goals, 'key').join(',');
+        this.weeklyGoalsPattern = `[${_.map(res.macro_goals, 'key').join('')}]{7}`;
       });
   }
 
@@ -121,6 +129,6 @@ class PlanEditController {
   }
 }
 
-PlanEditController.$inject = ['$mdDialog', 'TrendRecord', 'AppConstants'];
+PlanEditController.$inject = ['$mdDialog', 'TrendRecord', 'MacroGoal', 'AppConstants'];
 
 export default PlanEditController;

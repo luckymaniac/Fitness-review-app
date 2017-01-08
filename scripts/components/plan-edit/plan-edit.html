@@ -32,7 +32,7 @@
             <span class="max">/ {{$ctrl.max.protein}}g</span>
           </span>
         </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.protein / $ctrl.max.protein}}"></md-progress-linear>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.protein / $ctrl.max.protein * 100}}"></md-progress-linear>
       </div>
 
       <div class="progress" layout="column" layout-padding>
@@ -43,7 +43,7 @@
             <span class="max"> / {{$ctrl.max.carbs}}g</span>
           </span>
         </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.carbs / $ctrl.max.carbs}}"></md-progress-linear>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.carbs / $ctrl.max.carbs * 100}}"></md-progress-linear>
       </div>
 
       <div class="progress" layout="column" layout-padding>
@@ -54,15 +54,23 @@
             <span class="max"> / {{$ctrl.max.fat}}g</span>
           </span>
         </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.fat / $ctrl.max.fat}}"></md-progress-linear>
+        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.fat / $ctrl.max.fat * 100}}"></md-progress-linear>
       </div>
     </div>
     <div flex="65" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
       <div class="values" layout="row">
-        <label layout layout-align="begin center">Start Date:</label>
-        <span flex="70" flex-offset="5">
+        <label flex="10" layout layout-align="begin center">Start Date:</label>
+        <span flex="40" flex-offset="5">
           <md-datepicker ng-model="$ctrl.plan.start_date" md-placeholder="Enter start date" md-min-date="$ctrl.today"></md-datepicker>
         </span>
+        <label flex="20" layout layout-align="begin center">Weekly Goals ({{$ctrl.weeklyGoals}})</label>
+        <md-input-container>
+          <input ng-model="$ctrl.plan.weekly_goals" 
+                          ng-disabled="!$ctrl.isEditable()"
+                          ng-pattern="$ctrl.weeklyGoalsPattern"
+                          aria-label="weekly_goals"
+                          required>
+        </md-input-container>
       </div>
       <md-table-container>
         <table md-table md-row-select="false">
