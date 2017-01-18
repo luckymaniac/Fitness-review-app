@@ -3,6 +3,12 @@
   <md-content>
     <etp-main-menu></etp-main-menu>
 
+    <div layout="row">
+      <div flex="20">
+        <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
+      </div>
+    </div>
+
     <md-table-container>
       <table md-table md-row-select="false" md-progress="$ctrl.promise">
         <thead md-head md-order="query.order" md-on-reorder="$ctrl.onOrder">

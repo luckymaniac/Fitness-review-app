@@ -5,11 +5,13 @@
     </div>
     <div flex="65" flex-offset="5" layout="row" layout-align="space-between center">
       <div flex layout="row">
-        <md-subheader>New Plan</md-subheader>
+        <md-subheader>{{$ctrl.isEditable() ? 'New Plan' : 'Current Plan'}}</md-subheader>
         <md-button class="etp-primary-button" 
+                  ng-show="$ctrl.isEditable()"
                   ng-click="$ctrl.addNotes($event)"
                   ng-disabled="!$ctrl.isEditable()">Add Note</md-button>
         <md-button class="etp-primary-button md-raised" 
+                  ng-show="$ctrl.isEditable()"
                   ng-click="$ctrl.update()"
                   ng-disabled="!$ctrl.isPlanUpdatable()">Update</md-button>
       </div>
@@ -60,16 +62,20 @@
     <div flex="65" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
       <div class="values" layout="row">
         <label flex="10" layout layout-align="begin center">Start Date:</label>
-        <span flex="40" flex-offset="5">
-          <md-datepicker ng-model="$ctrl.plan.start_date" md-placeholder="Enter start date" md-min-date="$ctrl.today"></md-datepicker>
+        <span flex="40" flex-offset="5" layout layout-align="begin center">
+          <md-datepicker ng-model="$ctrl.plan.start_date"
+                        ng-if="$ctrl.isEditable()"
+                        md-placeholder="Enter start date"
+                        md-min-date="$ctrl.today"></md-datepicker>
+          <span ng-if="!$ctrl.isEditable()">{{$ctrl.client.current_plan.start_date}}</span>
         </span>
         <label flex="20" layout layout-align="begin center">Weekly Goals ({{$ctrl.weeklyGoals}})</label>
         <md-input-container>
-          <input ng-model="$ctrl.plan.weekly_goals" 
-                          ng-disabled="!$ctrl.isEditable()"
-                          ng-pattern="$ctrl.weeklyGoalsPattern"
-                          aria-label="weekly_goals"
-                          required>
+          <input ng-model="$ctrl.plan.weekly_goals"
+                ng-disabled="!$ctrl.isEditable()"
+                ng-pattern="$ctrl.weeklyGoalsPattern"
+                aria-label="weekly_goals"
+                required>
         </md-input-container>
       </div>
       <md-table-container>

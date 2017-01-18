@@ -11,7 +11,8 @@ class HomeController {
     this.query = {
       page: 1,
       size: 10,
-      sort: 'id'
+      sort: 'id',
+      search: null
     };
     this.total = 0;
 
@@ -30,6 +31,10 @@ class HomeController {
 
   onSelect(item) {
     this._$state.go('client', item);
+  }
+
+  onSearch() {
+    this.load();
   }
 
   //===== Table =====

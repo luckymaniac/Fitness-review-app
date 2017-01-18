@@ -1,8 +1,9 @@
 import planNoteDialogTemplate from './plan-notes-dialog.html';
 
 class PlanEditController {
-  constructor($mdDialog, TrendRecord, MacroGoal, AppConstants) {
+  constructor($mdDialog, Auth, TrendRecord, MacroGoal, AppConstants) {
     this._$mdDialog = $mdDialog;
+    this._Auth = Auth;
     this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
     this._MacroGoal = MacroGoal;
@@ -106,6 +107,8 @@ class PlanEditController {
 
   isEditable() {
     if (!this.client || !this.plan) return false;
+    if (!this._Auth.me.is_super) return false;
+
     if (!this.client.current_plan) return true;
     return moment(this.plan.start_date).format("YYYY-MM-DD") !== this.client.current_plan.start_date;
   }
@@ -129,6 +132,6 @@ class PlanEditController {
   }
 }
 
-PlanEditController.$inject = ['$mdDialog', 'TrendRecord', 'MacroGoal', 'AppConstants'];
+PlanEditController.$inject = ['$mdDialog', 'Auth', 'TrendRecord', 'MacroGoal', 'AppConstants'];
 
 export default PlanEditController;

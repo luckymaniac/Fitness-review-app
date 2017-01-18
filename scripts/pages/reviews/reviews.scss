@@ -23,5 +23,12 @@
         color: $warning-color;
       }
     }
+
+    td {
+      & > a {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
   }
 }

@@ -1,7 +1,8 @@
 class ReviewsController {
-  constructor(MacroReview) {
+  constructor(MacroReview, Auth) {
     window._$ctrl = this;
     this._MacroReview = MacroReview;
+    this._Auth = Auth;
 
     this.init();
   }
@@ -46,8 +47,12 @@ class ReviewsController {
     self.query.sort = order;
     self.load();
   }
+
+  isSuper() {
+    return this._Auth.me.is_super;
+  }
 }
 
-ReviewsController.$inject = ['MacroReview'];
+ReviewsController.$inject = ['MacroReview', 'Auth'];
 
 export default ReviewsController;

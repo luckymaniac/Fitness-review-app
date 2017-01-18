@@ -17,8 +17,9 @@ class ReviewEditController {
 
   isEditable() {
     if (!this.macroReview) return false;
+
     if (!this.macroReview.coach) {
-      return true;
+      return this._Auth.me.is_super;
     } else {
       return this.macroReview.coach.id === this._Auth.me.id
     }
