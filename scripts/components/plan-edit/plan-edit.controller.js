@@ -105,6 +105,10 @@ class PlanEditController {
     return !this.planForm.$invalid && !_.isEmpty(this.plan.notes);
   }
 
+  isSuper() {
+    return this._Auth.me.is_super;
+  }
+
   isEditable() {
     if (!this.client || !this.plan) return false;
     if (!this._Auth.me.is_super) return false;

@@ -61,6 +61,11 @@ a {
 
 em {
   color: $primary-color;
+
+  a {
+    color: $primary-color;
+    text-decoration: underline;
+  }
 }
 
 .values {

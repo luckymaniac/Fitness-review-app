@@ -1,7 +1,12 @@
 <div class="etp-review-edit" layout-padding>
   <div layout="row">
     <h3 class="sub-title">
-      Review requested by <em>{{ $ctrl.macroReview.client.first_name }} {{ $ctrl.macroReview.client.last_name }}</em>
+      Review requested by 
+      <em>
+        <a ui-sref="client({id:$ctrl.macroReview.client.id})">
+          {{ $ctrl.macroReview.client.first_name }} {{ $ctrl.macroReview.client.last_name }}
+        </a>
+      </em>
     </h3>
   </div>
 
