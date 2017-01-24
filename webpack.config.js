@@ -40,7 +40,7 @@ module.exports = {
         // ,contentBase: __dirname + '/build'
     },
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new ExtractTextPlugin("styles.css"),
         new webpack.ProvidePlugin({
             _: 'lodash',
