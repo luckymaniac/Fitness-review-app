@@ -2,7 +2,7 @@ let simpleDateFilter = function() {
   return function(dateStr) {
     if (!dateStr) return "";
 
-    return moment(new Date(dateStr)).format("MMM DD");
+    return moment(new Date(Date.parse(dateStr))).format("MMM DD");
   };
 };
 
