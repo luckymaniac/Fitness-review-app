@@ -1,3 +1,4 @@
 node_modules
 app/bower_components
-build/
+build/index.html
+build/bundle.js.map
