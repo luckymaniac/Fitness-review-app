@@ -90,12 +90,12 @@
 
           <tr md-row  ng-if="$ctrl.isTrendRecord(item)">
             <td md-cell>{{item.trend_date | simpleDate}}</td>
-            <td md-cell>{{item.protein}}</td>
-            <td md-cell>{{item.carbs}}</td>
-            <td md-cell>{{item.fat}}</td>
-            <td md-cell>{{item.steps}}</td>
-            <td md-cell>{{item.sleep_minutes | formatMinutes}}</td>
-            <td md-cell>{{item.calories_burned}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'protein')">{{item.protein}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'carbs')">{{item.carbs}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'fat')">{{item.fat}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'steps')">{{item.steps}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'sleep_minutes')">{{item.sleep_minutes | formatMinutes}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'calories_burned')">{{item.calories_burned}}</td>
             <td md-cell>{{item.weight}}</td>
           </tr>
         </tbody>

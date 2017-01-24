@@ -76,6 +76,22 @@
           }
         }
 
+        &.trend-record {
+          td {
+            &.red {
+              color: $high-text-color;
+            }
+
+            &.green {
+              color: $medium-text-color;
+            }
+
+            &.orange {
+              color: $low-text-color;
+            }
+          }
+        }
+
         .btn-link {
           display: block;
           text-align: center;

@@ -115,6 +115,43 @@ class TrackLogController {
     const today = moment();
     return !(today.year() === this.query.year && today.month() === this.query.month - 1);
   }
+
+  getCellClass(item, prop) {
+    const goal = _.get(item, 'macro_goal.title', '').toLowerCase();
+    const value = _.get(item, prop, 0);
+
+    let className = '';
+    if (prop === 'protein' || prop === 'carbs' || prop === 'fat') {
+      const key = goal + '_' + prop;
+      const plan = _.get(item, ['macro_plan', key], 0);
+      className = 'green';
+
+      if (prop === 'fat') {
+        if (value < plan - 5) className = 'orange';
+        else if (value > plan + 5) className = 'red';
+      } else {
+        if (value < plan - 10) className = 'orange';
+        else if (value > plan + 10) className = 'red';
+      }
+    } else if (prop === 'steps') {
+      if (value > 8000) className = 'green';
+      else if (value < 5000) className = 'red';
+      else className = 'orange';
+    } else if (prop === 'sleep_minutes') {
+      if (value > 7*60) className = 'green';
+      else if (value < 6 * 60) className = 'red';
+      else className = 'orange';
+    } else if (prop === 'calories_burned') {
+      const plan = _.get(item, ['macro_plan', `${goal}_protein`], 0) * 4 
+                 + _.get(item, ['macro_plan', `${goal}_carbs`], 0) * 4
+                 + _.get(item, ['macro_plan', `${goal}_fat`], 0) * 9;
+      if (value < plan * 0.95) className = 'orange';
+      else if (value > plan * 1.05) className = 'red';
+      else className = 'green';
+    }
+
+    return className;
+  }
 }
 
 TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan'];
