@@ -26,9 +26,27 @@
           <label flex="40">Body Fat</label>
           <span flex="60"></span>
         </div>
-        <div class="values" layout="row">
+        <div class="values" layout="row" layout-align="begin center">
           <label flex="40">Goal</label>
-          <span flex="60">{{$ctrl.goal.description}}</span>
+          <span flex="60" layout="row" ng-show="!$ctrl.isEditGoal" layout="row" layout-align="begin center">
+            <span>{{$ctrl.goal.description}}</span>
+            <md-button class="md-icon-button md-primary" aria-label="edit" ng-click="$ctrl.editGoal(true)" flex-offset="5">
+              <i class="material-icons">edit</i>
+            </md-button>
+          </span>
+          <span flex="60" layout="row" ng-show="$ctrl.isEditGoal" layout="row" layout-align="begin center">
+            <md-select ng-model="$ctrl.goal">
+              <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal">
+                {{goal.description}}
+              </md-option>
+            </md-select>
+            <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.update()" flex-offset="5">
+              <i class="material-icons">check</i>
+            </md-button>
+            <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancel()">
+              <i class="material-icons">close</i>
+            </md-button>
+          </span>
         </div>
       </div>
       <div flex="40" flex-offset="5" layout="column">
