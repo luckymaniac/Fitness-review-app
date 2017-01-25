@@ -1,8 +1,5 @@
-import planNoteDialogTemplate from './plan-notes-dialog.html';
-
 class PlanEditController {
-  constructor($mdDialog, Auth, TrendRecord, MacroGoal, AppConstants) {
-    this._$mdDialog = $mdDialog;
+  constructor(Auth, TrendRecord, MacroGoal, AppConstants) {
     this._Auth = Auth;
     this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
@@ -57,9 +54,12 @@ class PlanEditController {
     ];
 
     // initialize plan object
-    this.plan = _.clone(this.client.current_plan || this.default_plan);
-    this.plan.notes = '';
-    this.plan.start_date = new Date();
+    if (!this.plan) {
+      this.plan = _.clone(this.client.current_plan || this.default_plan);
+      this.plan.id = null;
+      this.plan.notes = '';
+      this.plan.start_date = new Date();
+    }
 
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
       .then(res => {
@@ -85,24 +85,9 @@ class PlanEditController {
     return `${level}_${prop}`;
   }
 
-  addNotes($event) {
-    if (!this.plan) return;
-    this._$mdDialog.show({
-      controller: 'PlanNotesDialogController as $dialog',
-      template: planNoteDialogTemplate,
-      parent: angular.element(document.body),
-      locals: {
-        value: this.plan.notes
-      }
-    })
-    .then(data => {
-      this.plan.notes = data.notes;
-    });
-  }
-
   isPlanUpdatable() {
     if (!this.plan || !this.isEditable()) return false;
-    return !this.planForm.$invalid && !_.isEmpty(this.plan.notes);
+    return !this.planForm.$invalid;
   }
 
   isSuper() {
@@ -110,11 +95,9 @@ class PlanEditController {
   }
 
   isEditable() {
-    if (!this.client || !this.plan) return false;
-    if (!this._Auth.me.is_super) return false;
+    if (this.plan && this.plan.coach && this.plan.coach.id !== this._Auth.me.id) return false;
 
-    if (!this.client.current_plan) return true;
-    return moment(this.plan.start_date).format("YYYY-MM-DD") !== this.client.current_plan.start_date;
+    return this._Auth.me.is_super;
   }
 
   update() {
@@ -123,6 +106,10 @@ class PlanEditController {
     this.onUpdate({
       $event: object
     });
+  }
+
+  addNew() {
+    this.onNew();
   }
 
   onChangePlan(key) {
@@ -136,6 +123,6 @@ class PlanEditController {
   }
 }
 
-PlanEditController.$inject = ['$mdDialog', 'Auth', 'TrendRecord', 'MacroGoal', 'AppConstants'];
+PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'AppConstants'];
 
 export default PlanEditController;

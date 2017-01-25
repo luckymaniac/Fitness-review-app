@@ -12,6 +12,9 @@ let clientModule = angular.module('client', [
     .state('client', {
       url: '/clients/:id',
       component: 'client',
+      params: {
+        plan_id: null
+      },
       resolve: {
         auth: (Auth) => {
           return Auth.ensureAuth();

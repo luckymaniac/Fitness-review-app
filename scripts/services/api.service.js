@@ -157,6 +157,16 @@ class API {
       });
   }
 
+  updateByClient(clientId, id, object) {
+    return this._put(`/clients/${clientId}${this.toString()}/${id}`, object)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return false;
+      });
+  }
+
   getQueryParams(query) {
     query = query || {};
     let params = _.clone(query);

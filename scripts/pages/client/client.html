@@ -2,7 +2,10 @@
 <main class="client-page">
   <md-content>
     <etp-client-info client="$ctrl.client"></etp-client-info>
-    <etp-plan-edit client="$ctrl.client" on-update="$ctrl.onPlanUpdate($event)"></etp-plan-edit>
+    <etp-plan-edit client="$ctrl.client"
+                  plan="$ctrl.macro_plan"
+                  on-update="$ctrl.onPlanUpdate($event)"
+                  on-new="$ctrl.onPlanNew()"></etp-plan-edit>
     <etp-weight-chart client="$ctrl.client"></etp-weight-chart>
     <etp-track-log client="$ctrl.client"></etp-track-log>
   </md-content>

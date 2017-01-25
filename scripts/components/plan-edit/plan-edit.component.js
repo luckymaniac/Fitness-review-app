@@ -6,7 +6,9 @@ let planEditComponent = {
   restrict: 'E',
   bindings: {
     client: '<',
-    onUpdate: '&'
+    plan: '<',
+    onUpdate: '&',
+    onNew: '&'
   },
   template,
   controller

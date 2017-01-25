@@ -23,11 +23,13 @@ body {
 
 .md-button {
   &.etp-primary-button {
+    border-color: $light-text-color;
+    border-style: solid;
+    border-width: 1px;
+
     &:not([disabled]) {
       color: $primary-color;
-      border-width: 1px;
       border-color: $primary-color;
-      border-style: solid;
 
       &.md-raised {
         background-color: $primary-color;
