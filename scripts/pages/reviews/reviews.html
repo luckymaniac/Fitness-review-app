@@ -11,7 +11,7 @@
         <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
       </div>
       <div flex="10" flex-offset="30">
-        <md-select ng-model="$ctrl.query.scope" aria-label="scope">
+        <md-select ng-model="$ctrl.query.scope" md-on-close="$ctrl.load()" aria-label="scope">
           <md-option value="all">Show All</md-option>
           <md-option value="pending">Pending</md-option>
           <md-option value="reviewed">Reviewed</md-option>

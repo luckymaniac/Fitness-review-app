@@ -4,8 +4,19 @@
     <etp-main-menu></etp-main-menu>
 
     <div layout="row">
-      <div flex="20">
+      <div flex="40">
         <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
+      </div>
+      <div flex="60" layout layout-align="end">
+        <md-input-container>
+          <md-select ng-model="$ctrl.query.scope" 
+                    md-on-close="$ctrl.onScopeChange()"
+                    aria-label="scope">
+            <md-option value="all">Show All</md-option>
+            <md-option value="with_macro_plan">With Plan</md-option>
+            <md-option value="without_macro_plan">Without Plan</md-option>
+          </md-select>
+        </md-input-container>
       </div>
     </div>
 
@@ -16,12 +27,14 @@
             <th md-column md-order-by="first_name"><span>Name</span></th>
             <th md-column md-order-by="email"><span>Email</span></th>
             <th md-column md-order-by="phone"><span>Phone</span></th>
+            <th md-column><span>Plan start at</span></th>
         </thead>
         <tbody md-body>
           <tr md-row ng-repeat="item in $ctrl.clients" ng-click="$ctrl.onSelect(item)">
             <td md-cell>{{item.first_name}} {{item.last_name}}</td>
             <td md-cell>{{item.email}}</td>
             <td md-cell>{{item.phone}}</td>
+            <td md-cell>{{item.current_plan.start_date | simpleDate}}</td>
           </tr>
         </tbody>
       </table>

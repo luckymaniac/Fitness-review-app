@@ -12,7 +12,8 @@ class HomeController {
       page: 1,
       size: 10,
       sort: 'id',
-      search: null
+      search: null,
+      scope: 'all'
     };
     this.total = 0;
 
@@ -34,6 +35,10 @@ class HomeController {
   }
 
   onSearch() {
+    this.load();
+  }
+
+  onScopeChange() {
     this.load();
   }
 
