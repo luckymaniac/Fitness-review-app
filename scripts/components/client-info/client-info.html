@@ -35,7 +35,7 @@
             </md-button>
           </span>
           <span flex="60" layout="row" ng-show="$ctrl.isEditGoal" layout="row" layout-align="begin center">
-            <md-select ng-model="$ctrl.goal">
+            <md-select ng-model="$ctrl.goal" aria-label="goals">
               <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal">
                 {{goal.description}}
               </md-option>

@@ -60,25 +60,42 @@
     </div>
     <div flex="65" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
       <div class="values" layout="row">
-        <label flex="10" layout layout-align="begin center">Start Date:</label>
-        <span flex="40" flex-offset="5" layout layout-align="begin center">
+        <label flex="10" layout layout-align="end center">Start Date</label>
+        <span flex="15" layout layout-align="begin center">
           <md-datepicker ng-model="$ctrl.plan.start_date"
                         ng-if="$ctrl.isSuper()"
                         md-placeholder="Enter start date"></md-datepicker>
           <span ng-if="!$ctrl.isSuper()">{{$ctrl.client.current_plan.start_date}}</span>
         </span>
-        <label flex="20" layout layout-align="begin center">Weekly Goals ({{$ctrl.weeklyGoals}})</label>
-        <md-input-container>
+        <label flex="20" layout layout-align="end center">Weekly Goals ({{$ctrl.weeklyGoals}})</label>
+        <md-input-container flex="15">
           <input ng-model="$ctrl.plan.weekly_goals"
                 ng-disabled="!$ctrl.isEditable()"
                 ng-pattern="$ctrl.weeklyGoalsPattern"
                 aria-label="weekly_goals"
                 required>
         </md-input-container>
+        <label flex="20" layout layout-align="end center">Auto review after</label>
+        <md-input-container flex="20">
+          <md-select ng-model="$ctrl.plan.auto_review_after" aria-label="plan.auto_review_after">
+            <md-option>
+              No auto review
+            </md-option>
+            <md-option ng-value="7">
+              One week request
+            </md-option>
+            <md-option ng-value="14">
+              Two weeks request
+            </md-option>
+            <md-option ng-value="30">
+              One month request
+            </md-option>
+          </md-select>
+        </md-input-container>
       </div>
       <div class="values" layout="row">
-        <label flex="10" layout layout-align="begin center">Note</label>
-        <md-input-container flex="80">
+        <label flex="10" layout layout-align="end center">Note</label>
+        <md-input-container flex="90">
           <textarea ng-model="$ctrl.plan.notes"
                     ng-disabled="!$ctrl.isEditable()"
                     aria-label="notes"

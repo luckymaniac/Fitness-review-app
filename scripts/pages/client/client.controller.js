@@ -37,7 +37,6 @@ class ClientController {
   }
 
   onPlanUpdate($event) {
-    console.log(">>>", $event);
     if ($event.id) {
       this._MacroPlan.updateByClient(this.params.id, $event.id, $event)
         .then(res => {

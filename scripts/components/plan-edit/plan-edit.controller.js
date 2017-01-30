@@ -59,6 +59,7 @@ class PlanEditController {
       this.plan.id = null;
       this.plan.notes = '';
       this.plan.start_date = new Date();
+      this.plan.auto_review_after = null;
     }
 
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
