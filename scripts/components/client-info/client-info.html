@@ -23,8 +23,8 @@
       </div>
       <div flex="25" flex-offset="5" layout="column">
         <div class="values" layout="row">
-          <label flex="40">Body Fat</label>
-          <span flex="60"></span>
+          <label flex="40">Gender</label>
+          <span flex="60">{{$ctrl.client.bio.gender === 'M' ? 'Male' : 'Female'}}</span>
         </div>
         <div class="values" layout="row" layout-align="begin center">
           <label flex="40">Goal</label>

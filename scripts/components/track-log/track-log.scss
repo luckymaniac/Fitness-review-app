@@ -27,6 +27,22 @@
               &.pending {
                 background-color: $warning-color;
               }
+
+              md-divider {
+                margin: 5px 0 3px;
+              }
+
+              p {
+                font-size: 12px;
+                margin: 0;
+                font-weight: 400;
+
+                span {
+                  font-weight: 600;
+                  margin-left: 40px;
+                  white-space: no-wrap;
+                }
+              }
             }
           }
         }
@@ -40,9 +56,25 @@
             td {
               padding: 8px 0;
 
-              span {
+              div {
                 outline: none;
                 cursor: pointer;
+              }
+
+              md-divider {
+                margin: 5px 0 3px;
+              }
+
+              p {
+                font-size: 12px;
+                margin: 0;
+                font-weight: 400;
+
+                span {
+                  font-weight: 600;
+                  margin-left: 40px;
+                  white-space: no-wrap;
+                }
               }
             }
           }
@@ -93,12 +125,9 @@
         }
 
         .btn-link {
-          display: block;
-          text-align: center;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          border: 2px solid $button-color;
+          i {
+            font-size: 16px;
+          }
         }
 
       }

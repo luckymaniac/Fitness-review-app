@@ -29,13 +29,17 @@
           <tr ng-if="$ctrl.isMacroReview(item)">
             <td colspan="8"  ng-class="{pending: item.pending}">
               <div layout="row">
-                <span flex="90" flex-offset="5" layout layout-align="center center">
-                  REVIEW REQUESTED {{item.is_auto ? "(AUTO)" : ""}}
-                </span>
+                <div flex="90" flex-offset="5">
+                  <span layout layout-align="center center">REVIEW REQUESTED {{item.is_auto ? "(AUTO)" : ""}}</span>
+                  <md-divider ng-if="!item.pending"></md-divider>
+                  <p ng-if="!item.pending" layout="row" layout-align="space-between center">
+                    <i>{{item.notes}}</i>
+                    <span>{{item.coach.first_name}} {{item.coach.last_name}}</span>
+                  </p>
+                </div>
                 <span flex="5" layout layout-align="center center">
                   <a ui-sref="review(item)" class="btn-link">
-                    ?
-                    <md-tooltip>{{item.notes}}</md-tooltip>
+                    <i class="material-icons">edit</i>
                   </a>
                 </span>
               </div>
@@ -49,11 +53,17 @@
                   <i class="material-icons" ng-show="!item.isExpanded">keyboard_arrow_down</i>
                   <i class="material-icons" ng-show="item.isExpanded">keyboard_arrow_up</i>
                 </span>
-                <span flex="90" layout layout-align="center center" ng-click="$ctrl.togglePlan(item)">PLAN UPDATED</span>
+                <div layout="column" ng-click="$ctrl.togglePlan(item)" flex="90">
+                  <span layout layout-align="center center">PLAN UPDATED</span>
+                  <md-divider></md-divider>
+                  <p layout="row" layout-align="space-between center">
+                    <i>{{item.notes}}</i>
+                    <span>{{item.coach.first_name}} {{item.coach.last_name}}</span>
+                  </p>
+                </div>
                 <span flex="5" layout layout-align="center center">
                   <a ui-sref="client({id: $ctrl.client.id, plan_id: item.id})" class="btn-link">
-                    ?
-                    <md-tooltip>{{item.notes}}</md-tooltip>
+                    <i class="material-icons">edit</i>
                   </a>
                 </span>
               </div>
