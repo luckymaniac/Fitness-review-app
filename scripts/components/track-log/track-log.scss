@@ -124,12 +124,37 @@
           }
         }
 
+        &.client-note {
+          tr {
+            td {
+              background-color: $alt-primary-color;
+              padding: 8px 0;
+
+              p {
+                font-size: 12px;
+                margin: 0;
+
+                span {
+                  margin-left: 40px;
+                  white-space: no-wrap;
+                }
+              }
+            }
+          }
+        }
+
         .btn-link {
           i {
             font-size: 16px;
           }
         }
 
+        .item-date {
+          font-size: 13px;
+          font-weight: 400;
+          padding-left: 24px;
+          padding-right: 24px;
+        }
       }
     }
   }

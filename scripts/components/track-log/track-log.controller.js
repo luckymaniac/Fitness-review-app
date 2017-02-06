@@ -1,9 +1,10 @@
 class TrackLogController {
-  constructor($scope, TrendRecord, MacroReview, MacroPlan) {
+  constructor($scope, TrendRecord, MacroReview, MacroPlan, Note) {
     this._$scope = $scope;
     this._TrendRecord = TrendRecord;
     this._MacroReview = MacroReview;
     this._MacroPlan = MacroPlan;
+    this._Note = Note;
   }
 
   $onInit() {
@@ -32,7 +33,8 @@ class TrackLogController {
     const promises = [
       this._TrendRecord.listByClient(this.client.id, this.query),
       this._MacroReview.listByClient(this.client.id, this.query),
-      this._MacroPlan.listByClient(this.client.id, this.query)
+      this._MacroPlan.listByClient(this.client.id, this.query),
+      this._Note.listByClient(this.client.id, this.query)
     ];
 
     Promise.all(promises)
@@ -40,6 +42,7 @@ class TrackLogController {
         this.trend_records = args[0].trend_records;
         this.macro_reviews = args[1].macro_reviews;
         this.macro_plans = args[2].macro_plans;
+        this.notes = args[3].notes;
 
         this.combine();
       });
@@ -65,6 +68,12 @@ class TrackLogController {
       row.type = 'macro-plan';
       this.dataRows.push(row);
     });
+    _.each(this.notes, o => {
+      const row = _.cloneDeep(o);
+      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
+      row.type = 'client-note';
+      this.dataRows.push(row);
+    })
 
     this.dataRows = _.sortBy(this.dataRows, ['date', 'type']).reverse();
 
@@ -93,6 +102,10 @@ class TrackLogController {
 
   isMacroPlan(item) {
     return item.type === 'macro-plan';
+  }
+
+  isClientNote(item) {
+    return item.type === 'client-note';
   }
 
   prev() {
@@ -154,6 +167,6 @@ class TrackLogController {
   }
 }
 
-TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan'];
+TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan', 'Note'];
 
 export default TrackLogController;

@@ -10,6 +10,8 @@ import MacroPlanService from './macro_plan.service';
 
 import TrendRecordService from './trend_record.service';
 
+import NoteService from './note.service';
+
 import GoalService from './goal.service';
 
 import MacroGoalService from './macro_goal.service';
@@ -28,6 +30,8 @@ let servicesModule = angular.module('app.services', [])
 .service('MacroGoal', MacroGoalService)
 
 .service('TrendRecord', TrendRecordService)
+
+.service('Note', NoteService)
 
 .service('Goal', GoalService)
   

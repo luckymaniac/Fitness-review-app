@@ -29,7 +29,12 @@
           <tr ng-if="$ctrl.isMacroReview(item)">
             <td colspan="8"  ng-class="{pending: item.pending}">
               <div layout="row">
-                <div flex="90" flex-offset="5">
+                <div flex="10" layout="row" layout-align="begin center">
+                  <span class="item-date">
+                    {{item.date | simpleDate}}
+                  </span>
+                </div>
+                <div flex="85">
                   <span layout layout-align="center center">REVIEW REQUESTED {{item.is_auto ? "(AUTO)" : ""}}</span>
                   <md-divider ng-if="!item.pending"></md-divider>
                   <p ng-if="!item.pending" layout="row" layout-align="space-between center">
@@ -49,11 +54,13 @@
           <tr ng-if="$ctrl.isMacroPlan(item)" class="item-head">
             <td colspan="8">
               <div layout="row">
-                <span flex="5" layout layout-align="center center" ng-click="$ctrl.togglePlan(item)">
-                  <i class="material-icons" ng-show="!item.isExpanded">keyboard_arrow_down</i>
-                  <i class="material-icons" ng-show="item.isExpanded">keyboard_arrow_up</i>
-                </span>
-                <div layout="column" ng-click="$ctrl.togglePlan(item)" flex="90">
+                <div flex="10" layout="row" layout-align="begin center">
+                  <span class="item-date" ng-click="$ctrl.togglePlan(item)">
+                    <i class="material-icons" ng-show="!item.isExpanded">keyboard_arrow_down</i>
+                    <i class="material-icons" ng-show="item.isExpanded">keyboard_arrow_up</i>
+                  </span>
+                </div>
+                <div layout="column" ng-click="$ctrl.togglePlan(item)" flex="85">
                   <span layout layout-align="center center">PLAN UPDATED</span>
                   <md-divider></md-divider>
                   <p layout="row" layout-align="space-between center">
@@ -98,7 +105,7 @@
             <td md-cell colspan="4">LOW</td>
           </tr>
 
-          <tr md-row  ng-if="$ctrl.isTrendRecord(item)">
+          <tr md-row ng-if="$ctrl.isTrendRecord(item)">
             <td md-cell>{{item.trend_date | simpleDate}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'protein')">{{item.protein}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'carbs')">{{item.carbs}}</td>
@@ -107,6 +114,24 @@
             <td md-cell ng-class="$ctrl.getCellClass(item, 'sleep_minutes')">{{item.sleep_minutes | formatMinutes}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'calories_burned')">{{item.calories_burned}}</td>
             <td md-cell>{{item.weight}}</td>
+          </tr>
+
+          <tr ng-if="$ctrl.isClientNote(item)">
+            <td colspan="8">
+              <div layout="row">
+                <div flex="10" layout="row" layout-align="begin center">
+                  <span class="item-date">
+                    {{item.date | simpleDate}}
+                  </span>
+                </div>
+                <div flex="85">
+                  <p layout="row" layout-align="space-between center">
+                    <i>{{item.content}}</i>
+                    <span>Client's Note</span>
+                  </p>
+                </div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
