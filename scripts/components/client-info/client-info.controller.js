@@ -17,12 +17,11 @@ class ClientInfoController {
     this.isExpanded = true;
 
     const goal_id = _.get(this.client, 'bio.goal_id');
-    if (goal_id) {
-      this._Goal.list().then(res => {
-        this.goals = res.goals;
-        this.goal = _.find(this.goals, {id: goal_id});
-      });
-    }
+    this._Goal.list().then(res => {
+      console.log(res);
+      this.goals = res.goals;
+      this.goal = _.find(this.goals, {id: goal_id});
+    });
   }
 
   toggle() {
