@@ -133,6 +133,22 @@
               </div>
             </td>
           </tr>
+
+          <tr ng-if="$ctrl.isGoalRecord(item)">
+            <td colspan="8">
+              <div layout="row">
+                <div flex="10" layout="row" layout-align="begin center">
+                  <span class="item-date">
+                    {{item.date | simpleDate}}
+                  </span>
+                </div>
+                <div flex="85" layout="row" layout-align="space-between center">
+                  <span>GOAL UPDATED</span>
+                  <span>{{item.description}}</span>
+                </div>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </md-table-container>

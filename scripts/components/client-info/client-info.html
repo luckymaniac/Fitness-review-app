@@ -29,24 +29,45 @@
         <div class="values" layout="row" layout-align="begin center">
           <label flex="40">Goal</label>
           <span flex="60" layout="row" ng-show="!$ctrl.isEditGoal" layout="row" layout-align="begin center">
-            <span>{{$ctrl.goal.description}}</span>
+            <span>
+              {{$ctrl.goal.description}}
+              {{$ctrl.client.bio.goal_phase ? '- Phase' + $ctrl.client.bio.goal_phase : ''}}
+            </span>
             <md-button class="md-icon-button md-primary" aria-label="edit" ng-click="$ctrl.editGoal(true)" flex-offset="5">
               <i class="material-icons">edit</i>
             </md-button>
           </span>
-          <span flex="60" layout="row" ng-show="$ctrl.isEditGoal" layout="row" layout-align="begin center">
-            <md-select ng-model="$ctrl.goal" aria-label="goals">
-              <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal">
-                {{goal.description}}
-              </md-option>
-            </md-select>
-            <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.update()" flex-offset="5">
-              <i class="material-icons">check</i>
-            </md-button>
-            <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancel()">
-              <i class="material-icons">close</i>
-            </md-button>
+          <span flex="60" ng-show="$ctrl.isEditGoal" layout="column">
+            <div layout="row" layout-align="begin center">
+              <md-select ng-model="$ctrl.goal" aria-label="goals">
+                <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal">
+                  {{goal.description}}
+                </md-option>
+              </md-select>
+              <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.update()" flex-offset="5">
+                <i class="material-icons">check</i>
+              </md-button>
+              <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancel()">
+                <i class="material-icons">close</i>
+              </md-button>
+            </div>
+            <div layout="row" layout-align="begin center" ng-show="$ctrl.goal.phases">
+              <md-slider-container flex="100">
+                <md-slider 
+                  flex
+                  min="1"
+                  max="{{$ctrl.goal.phases}}"
+                  ng-model="$ctrl.goal_phase"
+                  aria-label="phase"
+                  md-discrete
+                ></md-slider>
+              </md-slider-container>
+            </div>
           </span>
+        </div>
+        <div class="values" layout="row">
+          <label flex="40">Since</label>
+          <span flex="60">{{$ctrl.client.goal_record.created_at | simpleDate}}</span>
         </div>
       </div>
       <div flex="40" flex-offset="5" layout="column">

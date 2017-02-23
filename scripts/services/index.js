@@ -16,6 +16,8 @@ import GoalService from './goal.service';
 
 import MacroGoalService from './macro_goal.service';
 
+import GoalRecordService from './goal_record.service';
+
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', [])
 
@@ -34,6 +36,8 @@ let servicesModule = angular.module('app.services', [])
 .service('Note', NoteService)
 
 .service('Goal', GoalService)
+
+.service('GoalRecord', GoalRecordService)
   
 .name;
 

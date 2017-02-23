@@ -143,6 +143,24 @@
           }
         }
 
+        &.goal-record {
+          tr {
+            td {
+              background-color: $purple-color;
+              padding: 8px 0;
+              font-weight: 600;
+              color: $button-color;
+
+              span {
+                &:not(.item-date) {
+                  font-size: 14px;
+                  margin: 0;
+                }
+              }
+            }
+          }
+        }
+
         .btn-link {
           i {
             font-size: 16px;

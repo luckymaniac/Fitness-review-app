@@ -1,10 +1,11 @@
 class TrackLogController {
-  constructor($scope, TrendRecord, MacroReview, MacroPlan, Note) {
+  constructor($scope, TrendRecord, MacroReview, MacroPlan, Note, GoalRecord) {
     this._$scope = $scope;
     this._TrendRecord = TrendRecord;
     this._MacroReview = MacroReview;
     this._MacroPlan = MacroPlan;
     this._Note = Note;
+    this._GoalRecord = GoalRecord;
   }
 
   $onInit() {
@@ -34,7 +35,8 @@ class TrackLogController {
       this._TrendRecord.listByClient(this.client.id, this.query),
       this._MacroReview.listByClient(this.client.id, this.query),
       this._MacroPlan.listByClient(this.client.id, this.query),
-      this._Note.listByClient(this.client.id, this.query)
+      this._Note.listByClient(this.client.id, this.query),
+      this._GoalRecord.listByClient(this.client.id, this.query)
     ];
 
     Promise.all(promises)
@@ -43,6 +45,7 @@ class TrackLogController {
         this.macro_reviews = args[1].macro_reviews;
         this.macro_plans = args[2].macro_plans;
         this.notes = args[3].notes;
+        this.goal_records = args[4].goal_records;
 
         this.combine();
       });
@@ -74,6 +77,12 @@ class TrackLogController {
       row.type = 'client-note';
       this.dataRows.push(row);
     })
+    _.each(this.goal_records, o => {
+      const row = _.cloneDeep(o);
+      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
+      row.type = 'goal-record';
+      this.dataRows.push(row);
+    });
 
     this.dataRows = _.sortBy(this.dataRows, ['date', 'type']).reverse();
 
@@ -106,6 +115,10 @@ class TrackLogController {
 
   isClientNote(item) {
     return item.type === 'client-note';
+  }
+
+  isGoalRecord(item) {
+    return item.type === 'goal-record';
   }
 
   prev() {
@@ -167,6 +180,6 @@ class TrackLogController {
   }
 }
 
-TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan', 'Note'];
+TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan', 'Note', 'GoalRecord'];
 
 export default TrackLogController;
