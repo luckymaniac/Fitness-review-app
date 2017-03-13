@@ -27,6 +27,7 @@
             <th md-column><span>Name</span></th>
             <th md-column><span>Last Review</span></th>
             <th md-column><span>Review Reason</span></th>
+            <th md-column><span>Goal</span></th>
             <th md-column><span>Status</span></th>
         </thead>
         <tbody md-body>
@@ -39,6 +40,7 @@
             </td>
             <td md-cell>{{item.client.last_review.review_date | simpleDate}}</td>
             <td md-cell>{{item.reason}}</td>
+            <td md-cell>{{$ctrl.showGoal(item.client)}}</td>
             <td md-cell>
               <span class="status" ng-class="{pending: item.pending}">
                 {{item.pending ? "Pending" : "Updated on"}} {{item.review_date | simpleDate}}

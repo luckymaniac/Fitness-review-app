@@ -13,6 +13,10 @@
     <div layout="row">
       <div flex="25" layout="column">
         <div class="values" layout="row">
+          <label flex="40">Gender</label>
+          <span flex="60">{{$ctrl.client.bio.gender === 'M' ? 'Male' : 'Female'}}</span>
+        </div>
+        <div class="values" layout="row">
           <label flex="40">Weight</label>
           <span flex="60">{{$ctrl.client.bio.weight || 'Unknown'}} lbs</span>
         </div>
@@ -22,9 +26,10 @@
         </div>
       </div>
       <div flex="25" flex-offset="5" layout="column">
+
         <div class="values" layout="row">
-          <label flex="40">Gender</label>
-          <span flex="60">{{$ctrl.client.bio.gender === 'M' ? 'Male' : 'Female'}}</span>
+          <label flex="40">Membership</label>
+          <span flex="60">{{$ctrl.client.membership.name}}</span>
         </div>
         <div class="values" layout="row" layout-align="begin center">
           <label flex="40">Goal</label>
