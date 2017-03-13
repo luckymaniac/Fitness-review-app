@@ -25,20 +25,24 @@
           <span flex="60">{{$ctrl.client.bio.height | formatInch}}</span>
         </div>
       </div>
-      <div flex="25" flex-offset="5" layout="column">
 
+      <div flex="25" flex-offset="5" layout="column">
         <div class="values" layout="row">
           <label flex="40">Membership</label>
           <span flex="60">{{$ctrl.client.membership.name}}</span>
         </div>
         <div class="values" layout="row" layout-align="begin center">
           <label flex="40">Goal</label>
-          <span flex="60" layout="row" ng-show="!$ctrl.isEditGoal" layout="row" layout-align="begin center">
+          <span flex="60" layout="row" ng-show="!$ctrl.isEditGoal" layout-align="begin center">
             <span>
               {{$ctrl.goal.description}}
-              {{$ctrl.client.bio.goal_phase ? '- Phase' + $ctrl.client.bio.goal_phase : ''}}
+              {{$ctrl.client.bio.goal_phase ? '- Phase ' + $ctrl.client.bio.goal_phase : ''}}
             </span>
-            <md-button class="md-icon-button md-primary" aria-label="edit" ng-click="$ctrl.editGoal(true)" flex-offset="5">
+            <md-button class="md-icon-button md-primary" 
+                       aria-label="edit"
+                       flex-offset="5"
+                       ng-click="$ctrl.editGoal(true)"
+                       ng-if="$ctrl.isEditable">
               <i class="material-icons">edit</i>
             </md-button>
           </span>
@@ -49,10 +53,10 @@
                   {{goal.description}}
                 </md-option>
               </md-select>
-              <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.update()" flex-offset="5">
+              <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateGoal()" flex-offset="5">
                 <i class="material-icons">check</i>
               </md-button>
-              <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancel()">
+              <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancelGoal()">
                 <i class="material-icons">close</i>
               </md-button>
             </div>
@@ -70,11 +74,39 @@
             </div>
           </span>
         </div>
+        <div class="values" layout="row" layout-align="begin center">
+          <label flex="">Goal Weight (lbs)</label>
+          <span flex="60"
+                layout="row"
+                layout-align="begin center"
+                ng-show="!$ctrl.isEditGoalWeight">
+            <span>{{$ctrl.client.bio.goal_weight || 'Not specified'}}</span>
+            <md-button class="md-icon-button md-primary" 
+                       aria-label="edit"
+                       flex-offset="5"
+                       ng-click="$ctrl.editGoalWeight(true)"
+                       ng-if="$ctrl.isEditable">
+              <i class="material-icons">edit</i>
+            </md-button>
+          </span>
+          <span flex="60" layout="row" layout-align="begin center" ng-show="$ctrl.isEditGoalWeight">
+            <md-input-container>
+              <input ng-model="$ctrl.goal_weight" type="number" step=".1" aria-label="goal_weight">
+            </md-input-container>
+            <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateGoalWeight()" flex-offset="5">
+              <i class="material-icons">check</i>
+            </md-button>
+            <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancelGoalWeight()">
+              <i class="material-icons">close</i>
+            </md-button>
+          </span>
+        </div>
         <div class="values" layout="row">
           <label flex="40">Since</label>
           <span flex="60">{{$ctrl.client.goal_record.created_at | simpleDate}}</span>
         </div>
       </div>
+
       <div flex="40" flex-offset="5" layout="column">
         <div layout="column">
           <div class="values">

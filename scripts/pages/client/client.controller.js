@@ -66,6 +66,19 @@ class ClientController {
     }
   }
 
+  onGoalUpdate($event) {
+    this._Client.update(this.params.id, $event)
+      .then(res => {
+        if (res) {
+          this._AlertService.success("Client's goal is updated!");
+
+          this.load();
+        } else {
+          this._AlertService.error("Error to update client's goal");
+        }
+      });
+  }
+
   onPlanNew() {
     this.params.plan_id = null;
     this._$state.go('client', this.params);

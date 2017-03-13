@@ -1,7 +1,8 @@
 <etp-navbar></etp-navbar>
 <main class="client-page">
   <md-content>
-    <etp-client-info client="$ctrl.client"></etp-client-info>
+    <etp-client-info client="$ctrl.client"
+                    on-update="$ctrl.onGoalUpdate($event)"></etp-client-info>
     <etp-plan-edit client="$ctrl.client"
                   plan="$ctrl.macro_plan"
                   on-update="$ctrl.onPlanUpdate($event)"

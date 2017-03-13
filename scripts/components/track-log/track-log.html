@@ -20,14 +20,27 @@
             <th md-column>Proteins</th>
             <th md-column>Carbs</th>
             <th md-column>Fats</th>
+            <th md-column>Sodium</th>
             <th md-column>Steps</th>
             <th md-column>Sleep</th>
             <th md-column>Calories</th>
             <th md-column>Weight</th>
         </thead>
         <tbody md-body ng-repeat="item in $ctrl.dataRows" ng-class="item.type">
+          <tr md-row ng-if="$ctrl.isTrendRecord(item)">
+            <td md-cell>{{item.trend_date | simpleDate}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'protein')">{{item.protein}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'carbs')">{{item.carbs}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'fat')">{{item.fat}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'sodium')">{{item.sodium}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'steps')">{{item.steps}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'sleep_minutes')">{{item.sleep_minutes | formatMinutes}}</td>
+            <td md-cell ng-class="$ctrl.getCellClass(item, 'calories_burned')">{{item.calories_burned}}</td>
+            <td md-cell>{{item.weight}}</td>
+          </tr>
+
           <tr ng-if="$ctrl.isMacroReview(item)">
-            <td colspan="8"  ng-class="{pending: item.pending}">
+            <td colspan="9"  ng-class="{pending: item.pending}">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -52,7 +65,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isMacroPlan(item)" class="item-head">
-            <td colspan="8">
+            <td colspan="9">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date" ng-click="$ctrl.togglePlan(item)">
@@ -81,43 +94,32 @@
             <td md-cell>{{item.super_protein}}</td>
             <td md-cell>{{item.super_carbs}}</td>
             <td md-cell>{{item.super_fat}}</td>
-            <td md-cell colspan="4">SUPER</td>
+            <td md-cell colspan="5">SUPER</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body high" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.high_protein}}</td>
             <td md-cell>{{item.high_carbs}}</td>
             <td md-cell>{{item.high_fat}}</td>
-            <td md-cell colspan="4">HIGH</td>
+            <td md-cell colspan="5">HIGH</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body medium" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.medium_protein}}</td>
             <td md-cell>{{item.medium_carbs}}</td>
             <td md-cell>{{item.medium_fat}}</td>
-            <td md-cell colspan="4">MEDIUM</td>
+            <td md-cell colspan="5">MEDIUM</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body low" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.low_protein}}</td>
             <td md-cell>{{item.low_carbs}}</td>
             <td md-cell>{{item.low_fat}}</td>
-            <td md-cell colspan="4">LOW</td>
-          </tr>
-
-          <tr md-row ng-if="$ctrl.isTrendRecord(item)">
-            <td md-cell>{{item.trend_date | simpleDate}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'protein')">{{item.protein}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'carbs')">{{item.carbs}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'fat')">{{item.fat}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'steps')">{{item.steps}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'sleep_minutes')">{{item.sleep_minutes | formatMinutes}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'calories_burned')">{{item.calories_burned}}</td>
-            <td md-cell>{{item.weight}}</td>
+            <td md-cell colspan="5">LOW</td>
           </tr>
 
           <tr ng-if="$ctrl.isClientNote(item)">
-            <td colspan="8">
+            <td colspan="9">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -135,7 +137,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isGoalRecord(item)">
-            <td colspan="8">
+            <td colspan="9">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">

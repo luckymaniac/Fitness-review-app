@@ -5,7 +5,8 @@ import './client-info.scss';
 let clientInfoComponent = {
   restrict: 'E',
   bindings: {
-    client: '<'
+    client: '<',
+    onUpdate: '&'
   },
   template,
   controller
