@@ -72,7 +72,7 @@ class PlanEditController {
 
     // initialize plan object
     if (!this.plan) {
-      this.plan = _.clone(this.default_plan[_.get(this.client, 'bio.gender', 'M')]);
+      this.plan = _.clone(this.default_plan[_.get(this.client, 'bio.gender', 'F')]);
       this.plan.id = null;
       this.plan.notes = '';
       this.plan.start_date = new Date();
