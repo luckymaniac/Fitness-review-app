@@ -17,12 +17,20 @@
           <span flex="60">{{$ctrl.client.bio.gender === 'M' ? 'Male' : 'Female'}}</span>
         </div>
         <div class="values" layout="row">
+          <label flex="40">Age</label>
+          <span flex="60">{{$ctrl.ages[$ctrl.client.bio.age]}}</span>
+        </div>
+        <div class="values" layout="row">
           <label flex="40">Weight</label>
           <span flex="60">{{$ctrl.client.bio.weight || 'Unknown'}} lbs</span>
         </div>
         <div class="values" layout="row">
           <label flex="40">Height</label>
           <span flex="60">{{$ctrl.client.bio.height | formatInch}}</span>
+        </div>
+        <div class="values" layout="row">
+          <label flex="40">Facebook Name</label>
+          <span flex="60">{{$ctrl.client.fb_name}}</span>
         </div>
       </div>
 

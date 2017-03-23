@@ -31,19 +31,36 @@ class PlanEditController {
     };
 
     this.default_plan = {
-      low_protein: 50,
-      medium_protein: 100,
-      high_protein: 150,
-      super_protein: 200,
-      low_carbs: 100,
-      medium_carbs: 200,
-      high_carbs: 300,
-      super_carbs: 500,
-      low_fat: 50,
-      medium_fat: 90,
-      high_fat: 120,
-      super_fat: 160,
-      weekly_goals: 'MLHMMLS'
+      M: {
+        low_protein: 175,
+        medium_protein: 175,
+        high_protein: 175,
+        super_protein: 175,
+        low_carbs: 172,
+        medium_carbs: 247,
+        high_carbs: 281,
+        super_carbs: 281,
+        low_fat: 89,
+        medium_fat: 74,
+        high_fat: 74,
+        super_fat: 89,
+        weekly_goals: 'MLHMMLS'
+      },
+      F: {
+        low_protein: 135,
+        medium_protein: 135,
+        high_protein: 135,
+        super_protein: 135,
+        low_carbs: 134,
+        medium_carbs: 217,
+        high_carbs: 229,
+        super_carbs: 229,
+        low_fat: 71,
+        medium_fat: 54,
+        high_fat: 54,
+        super_fat: 71,
+        weekly_goals: 'MLHMMLS'
+      }
     };
 
     this.initFields = [
@@ -55,7 +72,7 @@ class PlanEditController {
 
     // initialize plan object
     if (!this.plan) {
-      this.plan = _.clone(this.client.current_plan || this.default_plan);
+      this.plan = _.clone(this.default_plan[_.get(this.client, 'bio.gender', 'M')]);
       this.plan.id = null;
       this.plan.notes = '';
       this.plan.start_date = new Date();

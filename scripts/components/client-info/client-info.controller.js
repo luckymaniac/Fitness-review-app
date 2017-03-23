@@ -15,6 +15,14 @@ class ClientInfoController {
   init() {
     this.isExpanded = true;
 
+    this.ages = {
+      10: "Below 20",
+      20: "20 - 30",
+      30: "31 - 40",
+      40: "41 - 50",
+      50: "Above 50"
+    };
+
     const goal_id = _.get(this.client, 'bio.goal_id');
     this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
     this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
