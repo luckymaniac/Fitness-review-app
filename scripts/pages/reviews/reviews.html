@@ -10,11 +10,16 @@
       <div flex="30">
         <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
       </div>
-      <div flex="10" flex-offset="30">
-        <md-select ng-model="$ctrl.query.scope" md-on-close="$ctrl.load()" aria-label="scope">
-          <md-option value="all">Show All</md-option>
+      <div flex="20" flex-offset="30" layout="row">
+        <md-select ng-model="$ctrl.query.scope" md-on-close="$ctrl.load()" aria-label="scope" flex="40">
+          <md-option value="all">All</md-option>
           <md-option value="pending">Pending</md-option>
           <md-option value="reviewed">Reviewed</md-option>
+        </md-select>
+
+        <md-select ng-model="$ctrl.query.goal_scope" md-on-close="$ctrl.load()" aria-label="scope" flex="40" flex-offset="20">
+          <md-option value="all">All</md-option>
+          <md-option ng-repeat="item in $ctrl.goals" value="{{item.id}}">{{item.description}}</md-option>
         </md-select>
       </div>
     </div>
