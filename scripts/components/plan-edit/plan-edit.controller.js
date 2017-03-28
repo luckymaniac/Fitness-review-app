@@ -1,9 +1,10 @@
 class PlanEditController {
-  constructor(Auth, TrendRecord, MacroGoal, AppConstants) {
+  constructor(Auth, TrendRecord, MacroGoal, MacroPlan, AppConstants) {
     this._Auth = Auth;
     this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
     this._MacroGoal = MacroGoal;
+    this._MacroPlan = MacroPlan;
   }
 
   $onInit() {
@@ -76,7 +77,7 @@ class PlanEditController {
       this.plan.id = null;
       this.plan.notes = '';
       this.plan.start_date = new Date();
-      this.plan.auto_review_after = null;
+      this.plan.auto_review_after = 14;
     }
 
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
@@ -92,6 +93,12 @@ class PlanEditController {
         this.macro_goals = res.macro_goals;
         this.weeklyGoals = _.map(res.macro_goals, 'key').join(',');
         this.weeklyGoalsPattern = `[${_.map(res.macro_goals, 'key').join('')}]{7}`;
+      });
+    this._MacroPlan.weekly_goals()
+      .then(res => {
+        if (res) {
+          this.weekly_goals = res.weekly_goals;
+        }
       });
   }
 
@@ -141,6 +148,6 @@ class PlanEditController {
   }
 }
 
-PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'AppConstants'];
+PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'MacroPlan', 'AppConstants'];
 
 export default PlanEditController;

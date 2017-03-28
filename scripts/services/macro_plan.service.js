@@ -8,6 +8,18 @@ class MacroPlan extends API {
   toString() {
     return '/macro_plans';
   }
+
+  weekly_goals() {
+    const url = this.toString() + '/weekly_goals';
+
+    return this._public_api(url)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return false;
+      });
+  }
 }
 
 MacroPlan.$inject = ['AppConstants', '$http', '$httpParamSerializer'];

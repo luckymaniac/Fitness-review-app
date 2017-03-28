@@ -12,7 +12,7 @@ class API {
   }
 
   buildURL(url=null) {
-    let fullUrl = this.baseAPIURL;
+    let fullUrl = this._AppConstants.api;
     if (url) {
       fullUrl += url;
     }
@@ -21,78 +21,60 @@ class API {
     return fullUrl;
   }
 
-  _post(url, data=null) {
-    return this._$http({
-      url: this.buildURL(url),
-      method: 'POST',
-      data: data
-    })
+  _api(options) {
+    return this._$http(options)
       .then(res => {
         if (res.data.success) {
           return Promise.resolve(res.data);
         } else {
-          return Pormise.reject(res.data);
+          return Promise.reject(res.data);
         };
       })
       .catch(err => {
-        return Promise.reject(err);
+        return Promise.reject(err.data);
       });
   }
 
+  _post(url, data=null) {
+    return this._api({
+      url: this.buildURL(url),
+      method: 'POST',
+      data: data
+    });
+  }
+
   _put(url, data=null) {
-    return this._$http({
+    return this._api({
       url: this.buildURL(url),
       method: 'PUT',
       data: data
-    })
-      .then(res => {
-        if (res.data.success) {
-          return Promise.resolve(res.data);
-        } else {
-          return Pormise.reject(res.data);
-        };
-      })
-      .catch(err => {
-        return Promise.reject(err);
-      });
+    });
   }
 
   _get(url=null, data=null) {
     let qs = data ? '?' + this._$httpParamSerializer(data) : '';
 
-    return this._$http({
+    return this._api({
       url: this.buildURL(url) + qs,
       method: 'GET'
-    })
-      .then(res => {
-        if (res.data.success) {
-          return Promise.resolve(res.data);
-        } else {
-          return Promise.reject(res.data);
-        };
-      })
-      .catch(err => {
-        return Promise.reject(err);
-      });
+    });
   }
 
   _delete(url=null, data=null) {
     let qs = data ? '?' + this._$httpParamSerializer(data) : '';
 
-    return this._$http({
+    return this._api({
       url: this.buildURL(url) + qs,
       method: 'DELETE'
-    })
-      .then(res => {
-        if (res.data.success) {
-          return Promise.resolve(res.data);
-        } else {
-          return Promise.reject(res.data);
-        };
-      })
-      .catch(err => {
-        return Promise.reject(err);
-      });
+    });
+  }
+
+  _public_api(url, data=null) {
+    return this._api({
+      url: this._AppConstants.public_api + url + '.json',
+      method: 'GET',
+      data: data
+    });
   }
 
   list(query) {
@@ -124,11 +106,11 @@ class API {
       })
       .catch(err => {
         return false;
-      })
+      });
   }
 
   listByClient(clientId, query) {
-    return this._get(`/clients/${clientId}/${this.toString()}`, query)
+    return this._get(`/clients/${clientId}${this.toString()}`, query)
       .then(res => {
         return res;
       })
