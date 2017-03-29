@@ -183,7 +183,11 @@ class PlanEditController {
   }
 
   setSuperDay(item) {
-    this.plan.weekly_goals = item.goals;
+    if (!item) {
+      this.plan.weekly_goals = "";
+    } else {
+      this.plan.weekly_goals = item.goals;
+    }
   }
 }
 
