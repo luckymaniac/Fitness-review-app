@@ -128,7 +128,10 @@
                 </div>
                 <div flex="85">
                   <p layout="row" layout-align="space-between center">
-                    <i>{{item.content}}</i>
+                    <span>
+                      <b ng-if="item.workout_type">{{item.workout_type.title}}</b>
+                      <i>{{item.content}}</i>
+                    </span>
                     <span>Client's Note</span>
                   </p>
                 </div>

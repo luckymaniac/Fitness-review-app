@@ -73,7 +73,7 @@ class TrackLogController {
     });
     _.each(this.notes, o => {
       const row = _.cloneDeep(o);
-      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
+      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD HH:mm:ss');
       row.type = 'client-note';
       this.dataRows.push(row);
     })

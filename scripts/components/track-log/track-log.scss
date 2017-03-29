@@ -16,6 +16,10 @@
 
     tbody {
       &.md-body {
+        td {
+          border-top: 1px solid $border-color;
+        }
+
         &.macro-review {
           tr {
             td {
@@ -134,9 +138,9 @@
                 font-size: 12px;
                 margin: 0;
 
-                span {
-                  margin-left: 40px;
-                  white-space: no-wrap;
+                b {
+                  color: $primary-color;
+                  margin-right: 16px;
                 }
               }
             }
