@@ -67,12 +67,25 @@
                         md-placeholder="Enter start date"></md-datepicker>
           <span ng-if="!$ctrl.isSuper()">{{$ctrl.client.current_plan.start_date}}</span>
         </span>
+
         <label flex="20" layout layout-align="end center">Super Day</label>
-        <md-input-container flex="15">
-          <md-select ng-model="$ctrl.plan.weekly_goals" aria-label="plan.weekly_goals" required>
-            <md-option ng-repeat="item in $ctrl.weekly_goals" ng-value="item.goals">{{item.weekday}}</md-option>
-          </md-select>
-        </md-input-container>
+        <md-autocomplete flex="15"
+            required
+            md-no-cache="true"
+            md-selected-item="$ctrl.super_day"
+            md-search-text-change="$ctrl.addSuperDay($ctrl.searchText)"
+            md-search-text="$ctrl.searchText"
+            md-items="item in $ctrl.querySuperDay($ctrl.searchText)"
+            md-selected-item-change="$ctrl.setSuperDay(item)"
+            md-item-text="item.weekday"
+            md-min-length="0"
+            md-require-match
+            md-floating-label="Select super day">
+          <md-item-template>
+            <span md-highlight-text="$ctrl.searchText">{{item.weekday}}</span>
+          </md-item-template>
+        </md-autocomplete>
+
         <label flex="20" layout layout-align="end center">Auto review after</label>
         <md-input-container flex="20">
           <md-select ng-model="$ctrl.plan.auto_review_after" aria-label="plan.auto_review_after">

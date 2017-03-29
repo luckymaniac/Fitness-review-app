@@ -8,7 +8,6 @@ class PlanEditController {
   }
 
   $onInit() {
-    this.init();
   }
 
   $onChanges(changes) {
@@ -91,13 +90,12 @@ class PlanEditController {
     this._MacroGoal.list()
       .then(res => {
         this.macro_goals = res.macro_goals;
-        this.weeklyGoals = _.map(res.macro_goals, 'key').join(',');
-        this.weeklyGoalsPattern = `[${_.map(res.macro_goals, 'key').join('')}]{7}`;
       });
+
     this._MacroPlan.weekly_goals()
       .then(res => {
         if (res) {
-          this.weekly_goals = res.weekly_goals;
+          this.initSuperDayList(res.weekly_goals);
         }
       });
   }
@@ -145,6 +143,47 @@ class PlanEditController {
       });
       _.remove(this.initFields, g => g.indexOf(key) >= 0);
     }
+  }
+
+  initSuperDayList(list) {
+    this.super_day_list = _.cloneDeep(list);
+    this.super_day = _.find(list, {goals: this.plan.weekly_goals});
+    if (!this.super_day) {
+      this.super_day = {
+        weekday: this.plan.weekly_goals,
+        goals: this.plan.weekly_goals
+      };
+      this.super_day_list.unshift(this.super_day);
+    }
+  }
+
+  querySuperDay(search) {
+    const q = search.toLowerCase();
+    return _.filter(this.super_day_list, item => {
+      return item.weekday.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+
+  addSuperDay(search) {
+    if (!search || search.length != 7) return;
+    const q = search.toUpperCase();
+
+    if (_.find(this.super_day_list, {goals: q})) return;
+    // console.log(this.macro_goals);
+    const arr = _.filter(q.split(''), key => {
+      return _.find(this.macro_goals, {key});
+    });
+
+    if (arr.length === q.length) {
+      this.super_day_list.unshift({
+        weekday: q,
+        goals: q
+      });
+    }
+  }
+
+  setSuperDay(item) {
+    this.plan.weekly_goals = item.goals;
   }
 }
 
