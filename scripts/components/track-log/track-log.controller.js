@@ -53,16 +53,24 @@ class TrackLogController {
 
   combine() {
     this.dataRows = [];
-    _.each(this.trend_records, o => {
+
+    this.notes          = _.sortBy(this.notes, 'created_at');
+    this.trend_records  = _.sortBy(this.trend_records, 'trend_date');
+    this.macro_plans    = _.sortBy(this.macro_plans, 'created_at');
+    this.macro_reviews  = _.sortBy(this.macro_reviews, 'created_at');
+    this.goal_records   = _.sortBy(this.goal_records, 'created_at');
+
+    _.each(this.goal_records, o => {
       const row = _.cloneDeep(o);
-      row.date = o.trend_date;
-      row.type = 'trend-record';
+      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
+      row.type = 'goal-record';
       this.dataRows.push(row);
     });
     _.each(this.macro_reviews, o => {
       const row = _.cloneDeep(o);
       row.date = o.request_date;
       row.type = 'macro-review';
+      row.pending = !o.review_date;
       this.dataRows.push(row);
     });
     _.each(this.macro_plans, o => {
@@ -71,20 +79,20 @@ class TrackLogController {
       row.type = 'macro-plan';
       this.dataRows.push(row);
     });
+    _.each(this.trend_records, o => {
+      const row = _.cloneDeep(o);
+      row.date = o.trend_date;
+      row.type = 'trend-record';
+      this.dataRows.push(row);
+    });
     _.each(this.notes, o => {
       const row = _.cloneDeep(o);
-      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD HH:mm:ss');
-      row.type = 'client-note';
-      this.dataRows.push(row);
-    })
-    _.each(this.goal_records, o => {
-      const row = _.cloneDeep(o);
       row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
-      row.type = 'goal-record';
+      row.type = 'client-note';
       this.dataRows.push(row);
     });
 
-    this.dataRows = _.sortBy(this.dataRows, ['date', 'type']).reverse();
+    this.dataRows = _.sortBy(this.dataRows, ['date']).reverse();
 
     this._$scope.$apply();
   }
