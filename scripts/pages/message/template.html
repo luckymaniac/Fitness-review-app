@@ -1,0 +1,10 @@
+<etp-navbar></etp-navbar>
+<main class="client-page">
+  <md-content>
+    <etp-message-editor
+      client="$ctrl.client"
+      on-update="$ctrl.onUpdate($event)"
+    ></etp-message-editor>
+    <etp-track-log client="$ctrl.client"></etp-track-log>
+  </md-content>
+</main>

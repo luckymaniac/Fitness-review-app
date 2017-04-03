@@ -153,6 +153,29 @@
               </div>
             </td>
           </tr>
+
+          <tr ng-if="$ctrl.isMessage(item)">
+            <td colspan="9" ng-class="{'is-reply': item.is_reply}">
+              <div layout="row">
+                <div flex="10" layout="row" layout-align="begin center">
+                  <span class="item-date">
+                    {{item.date | simpleDate}}
+                  </span>
+                </div>
+                <div flex="85">
+                  <p layout="row" layout-align="space-between center">
+                    <span layout="row" layout-align="begin center">
+                      <i class="material-icons" ng-if="!item.is_reply">arrow_forward</i>
+                      <i class="material-icons" ng-if="item.is_reply">arrow_back</i>
+                      <i>{{item.content}}</i>
+                    </span>
+                    <span ng-if="!item.is_reply">{{item.client.first_name}} {{item.client.last_name}}</span>
+                    <span ng-if="item.is_reply">{{item.coach.first_name}} {{item.coach.last_name}}</span>
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </md-table-container>

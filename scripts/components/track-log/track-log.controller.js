@@ -1,11 +1,12 @@
 class TrackLogController {
-  constructor($scope, TrendRecord, MacroReview, MacroPlan, Note, GoalRecord) {
+  constructor($scope, TrendRecord, MacroReview, MacroPlan, Note, GoalRecord, Message) {
     this._$scope = $scope;
     this._TrendRecord = TrendRecord;
     this._MacroReview = MacroReview;
     this._MacroPlan = MacroPlan;
     this._Note = Note;
     this._GoalRecord = GoalRecord;
+    this._Message = Message;
   }
 
   $onInit() {
@@ -36,7 +37,8 @@ class TrackLogController {
       this._MacroReview.listByClient(this.client.id, this.query),
       this._MacroPlan.listByClient(this.client.id, this.query),
       this._Note.listByClient(this.client.id, this.query),
-      this._GoalRecord.listByClient(this.client.id, this.query)
+      this._GoalRecord.listByClient(this.client.id, this.query),
+      this._Message.listByClient(this.client.id, this.query)
     ];
 
     Promise.all(promises)
@@ -46,6 +48,7 @@ class TrackLogController {
         this.macro_plans = args[2].macro_plans;
         this.notes = args[3].notes;
         this.goal_records = args[4].goal_records;
+        this.messages = args[5].messages;
 
         this.combine();
       });
@@ -59,6 +62,7 @@ class TrackLogController {
     this.macro_plans    = _.sortBy(this.macro_plans, 'created_at');
     this.macro_reviews  = _.sortBy(this.macro_reviews, 'created_at');
     this.goal_records   = _.sortBy(this.goal_records, 'created_at');
+    this.messages       = _.sortBy(this.messages, 'created_at');
 
     _.each(this.goal_records, o => {
       const row = _.cloneDeep(o);
@@ -89,6 +93,12 @@ class TrackLogController {
       const row = _.cloneDeep(o);
       row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
       row.type = 'client-note';
+      this.dataRows.push(row);
+    });
+    _.each(this.messages, o => {
+      const row = _.cloneDeep(o);
+      row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
+      row.type = 'message';
       this.dataRows.push(row);
     });
 
@@ -127,6 +137,10 @@ class TrackLogController {
 
   isGoalRecord(item) {
     return item.type === 'goal-record';
+  }
+
+  isMessage(item) {
+    return item.type === 'message';
   }
 
   prev() {
@@ -188,6 +202,6 @@ class TrackLogController {
   }
 }
 
-TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan', 'Note', 'GoalRecord'];
+TrackLogController.$inject = ['$scope', 'TrendRecord', 'MacroReview', 'MacroPlan', 'Note', 'GoalRecord', 'Message'];
 
 export default TrackLogController;

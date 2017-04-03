@@ -1,0 +1,12 @@
+@import '../../common/variables';
+
+.assignees-page {
+  .md-table {
+    .md-body {
+      .md-row {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+}

@@ -11,6 +11,10 @@ const AppMessages = {
   macro_review: {
     success_to_update: 'Macro review is updated successfully.',
     failed_to_update: 'Failed to update requeted review.'
+  },
+  message: {
+    success_to_create: 'Message is sent successfully.',
+    failed_to_create: 'Failed to send a message.',
   }
 };
 

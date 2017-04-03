@@ -18,6 +18,8 @@ import MacroGoalService from './macro_goal.service';
 
 import GoalRecordService from './goal_record.service';
 
+import MessageService from './message.service';
+
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', [])
 
@@ -38,6 +40,8 @@ let servicesModule = angular.module('app.services', [])
 .service('Goal', GoalService)
 
 .service('GoalRecord', GoalRecordService)
+
+.service('Message', MessageService)
   
 .name;
 

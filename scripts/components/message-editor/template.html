@@ -1,0 +1,29 @@
+<div class="etp-message-editor" layout-padding>
+  <section class="head" layout="row" layout-align="space-between center">
+    <md-subheader>Message to {{$ctrl.client.first_name}} {{$ctrl.client.last_name}}</md-subheader>
+    <span ng-click="$ctrl.toggle()">
+      <i class="material-icons" ng-show="!$ctrl.isExpanded">keyboard_arrow_down</i>
+      <i class="material-icons" ng-show="$ctrl.isExpanded">keyboard_arrow_up</i>
+    </span>
+  </section>
+
+  <md-divider></md-divider>
+
+  <section class="body" layout="column" ng-show="$ctrl.isExpanded" layout-padding ng-form="$ctrl.messageForm">
+    <div layout="row" class="values">
+      <md-input-container class="md-block" flex="100">
+        <label>Message</label>
+        <textarea ng-model="$ctrl.content"
+                  md-maxlength="500"
+                  required
+                  aria-label="message-content"
+                  rows="1"></textarea>
+      </md-input-container>
+    </div>
+    <div layout="row" layout-align="end">
+      <md-button class="md-raised etp-primary-button"
+                ng-click="$ctrl.update()"
+                ng-disabled="$ctrl.messageForm.$invalid || $ctrl.messageForm.$pristine">Send</md-button>
+    </div>
+  </section>
+</div>

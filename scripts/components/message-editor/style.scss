@@ -1,0 +1,30 @@
+@import '../../common/variables';
+
+.etp-message-editor {
+  section {
+    &.head {
+      .md-subheader {
+        background-color: $bg-color;
+      }
+
+      span {
+        outline: none;
+        cursor: pointer;
+
+        i {
+          color: $primary-color;
+        }
+      }
+    }
+
+    &.body {
+      md-select {
+        margin: 0;
+      }
+
+      .md-errors-spacer {
+        display: none;
+      }
+    }
+  }
+}

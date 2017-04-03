@@ -8,6 +8,18 @@ class Client extends API {
   toString() {
     return '/clients';
   }
+
+  assignees(query) {
+    const params = this.getQueryParams(query);
+
+    return this._get(this.toString() + "/assignees", params)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return false;
+      });
+  }
 }
 
 Client.$inject = ['AppConstants', '$http', '$httpParamSerializer'];

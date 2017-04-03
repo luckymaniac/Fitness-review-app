@@ -8,6 +8,7 @@ import ReviewEdit from './review-edit';
 import TrackLog from './track-log';
 import ClientInfo from './client-info';
 import PlanEdit from './plan-edit';
+import MessageEditor from './message-editor';
 
 let componentModule = angular.module('app.components', [
   Logo,
@@ -17,7 +18,8 @@ let componentModule = angular.module('app.components', [
   ReviewEdit,
   TrackLog,
   ClientInfo,
-  PlanEdit
+  PlanEdit,
+  MessageEditor
 ])
   
 .name;

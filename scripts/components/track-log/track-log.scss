@@ -165,6 +165,34 @@
           }
         }
 
+        &.message {
+          tr {
+            td {
+              background-color: $msg-primary-color;
+              padding: 8px 0;
+
+              &.is-reply {
+                background-color: $msg-secondary-color;
+              }
+
+              p {
+                font-size: 12px;
+                margin: 0;
+
+                .material-icons {
+                  font-size: 14px;
+                  margin-right: 12px;
+                }
+
+                b {
+                  color: $primary-color;
+                  margin-right: 16px;
+                }
+              }
+            }
+          }
+        }
+
         .btn-link {
           i {
             font-size: 16px;
