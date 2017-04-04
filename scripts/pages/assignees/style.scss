@@ -3,9 +3,17 @@
 .assignees-page {
   .md-table {
     .md-body {
-      .md-row {
-        cursor: pointer;
-        outline: none;
+      .md-cell {
+        .material-icons {
+          font-size: 14px;
+          margin-right: 12px;
+          color: $primary-color;
+        }
+
+        a {
+          color: $primary-color;
+          text-decoration: underline;
+        }
       }
     }
   }

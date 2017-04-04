@@ -11,7 +11,7 @@ class HomeController {
     this.query = {
       page: 1,
       size: 10,
-      sort: 'id',
+      sort: '-created_at',
       search: null,
       scope: 'all'
     };

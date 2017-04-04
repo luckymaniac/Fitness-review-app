@@ -1,6 +1,6 @@
-import template from './home.html';
-import controller from './home.controller';
-import './home.scss';
+import template from './template.html';
+import controller from './controller';
+import './style.scss';
 
 let homeComponent = {
   restrict: 'E',
