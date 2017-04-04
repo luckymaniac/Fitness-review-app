@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import component from './component';
+import component from './assignees.component';
 
 let module = angular.module('assignees', [
   uiRouter

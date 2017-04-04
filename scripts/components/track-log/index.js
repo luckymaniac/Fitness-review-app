@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import TrackLogComponent from './component';
+import TrackLogComponent from './track-log.component';
 
 let TrackLogModule = angular.module('track-log', [])
 

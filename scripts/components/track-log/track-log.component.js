@@ -1,6 +1,6 @@
-import template from './template.html';
-import controller from './controller';
-import './style.scss';
+import template from './track-log.html';
+import controller from './track-log.controller';
+import './track-log.scss';
 
 let component = {
   restrict: 'E',
