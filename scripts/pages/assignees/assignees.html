@@ -44,7 +44,7 @@
             </td>
             <td md-cell>{{item.message.created_at | date:'MMM dd, hh:mm a'}}</td>
             <td md-cell>
-              <md-button class="etp-primary-button" ng-click="$ctrl.onSelect(item)">
+              <md-button class="etp-primary-button" ng-click="$ctrl.onSelect(item)" ng-class="{'md-raised': !item.message.is_reply}">
                 {{item.message.is_reply ? 'Send' : 'Reply'}}
               </md-button>
             </td>
