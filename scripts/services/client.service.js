@@ -20,6 +20,17 @@ class Client extends API {
         return false;
       });
   }
+
+  pending_assignee_count() {
+    return this._get(this.toString() + "/pending_assignee_count")
+      .then(res => {
+        this.assignee_badge = _.get(res, 'count', 0);
+        return res;
+      })
+      .catch(err => {
+        return false;
+      });
+  }
 }
 
 Client.$inject = ['AppConstants', '$http', '$httpParamSerializer'];
