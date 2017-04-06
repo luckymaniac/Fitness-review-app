@@ -38,14 +38,14 @@
             </td>
             <td md-cell>{{item.email}}</td>
             <td md-cell>
-              <i class="material-icons" ng-if="!item.message.is_reply">arrow_forward</i>
-              <i class="material-icons" ng-if="item.message.is_reply">arrow_back</i>
+              <i class="material-icons" ng-if="$ctrl.isPending(item)">arrow_forward</i>
+              <i class="material-icons" ng-if="$ctrl.isReplied(item)">arrow_back</i>
               <i>{{item.message.content}}</i>
             </td>
             <td md-cell>{{item.message.created_at | date:'MMM dd, hh:mm a'}}</td>
             <td md-cell>
-              <md-button class="etp-primary-button" ng-click="$ctrl.onSelect(item)" ng-class="{'md-raised': !item.message.is_reply}">
-                {{item.message.is_reply ? 'Send' : 'Reply'}}
+              <md-button class="etp-primary-button" ng-click="$ctrl.onSelect(item)" ng-class="{'md-raised': $ctrl.isPending(item)}">
+                {{$ctrl.isPending(item) ? 'Reply' : 'Send'}}
               </md-button>
             </td>
           </tr>

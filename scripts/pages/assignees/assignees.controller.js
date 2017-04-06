@@ -30,6 +30,14 @@ class AssigneesController {
     });
   }
 
+  isPending(item) {
+    return item.message && !item.message.is_reply;
+  }
+
+  isReplied(item) {
+    return item.message && item.message.is_reply;
+  }
+
   onSelect(item) {
     this._$state.go('message', {client_id: item.id});
   }
@@ -39,12 +47,6 @@ class AssigneesController {
     let $ctrl = window._$ctrl; // TODO: get rid of this dirty hack
     $ctrl.query.page = page;
     $ctrl.query.limit = limit;
-    $ctrl.load();
-  }
-
-  onOrder(order) {
-    let $ctrl = window._$ctrl; // TODO: get rid of this dirty hack
-    $ctrl.query.sort = order;
     $ctrl.load();
   }
 }
