@@ -31,6 +31,16 @@ class Client extends API {
         return false;
       });
   }
+
+  updateSetting(id, setting) {
+    return this._put(`${this.toString()}/${id}/setting`, setting)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return false;
+      });
+  }
 }
 
 Client.$inject = ['AppConstants', '$http', '$httpParamSerializer'];

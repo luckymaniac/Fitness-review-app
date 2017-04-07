@@ -79,6 +79,19 @@ class ClientController {
       });
   }
 
+  onCoachUpdate($event) {
+    this._Client.updateSetting(this.params.id, $event)
+      .then(res => {
+        if (res) {
+          this._AlertService.success("Client's setting is updated!");
+
+          this.load();
+        } else {
+          this._AlertService.error("Error to update client's setting");
+        }
+      });
+  }
+
   onPlanNew() {
     this.params.plan_id = null;
     this._$state.go('client', this.params);

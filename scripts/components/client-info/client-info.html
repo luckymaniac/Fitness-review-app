@@ -124,6 +124,52 @@
             <span>{{$ctrl.client.setting.daily_activity}}</span>
           </div>
         </div>
+        <div layout="row" class="values" layout-align="begin center">
+          <label flex="30">Assigned Coach</label>
+          <div flex="70">
+            <div ng-show="!$ctrl.isEditCoach" layout="row" layout-align="begin center">
+              <span ng-if="$ctrl.client.setting.coach">
+                {{$ctrl.client.setting.coach.first_name}}
+                {{$ctrl.client.setting.coach.last_name}}
+              </span>
+              <span ng-if="!$ctrl.client.setting.coach">No coach</span>
+              <md-button class="md-icon-button md-primary" 
+                       aria-label="edit"
+                       flex-offset="5"
+                       ng-click="$ctrl.editCoach(true)"
+                       ng-if="$ctrl.isEditable">
+                <i class="material-icons">edit</i>
+              </md-button>
+              <a ui-sref="message({client_id: $ctrl.client.id})" class="to-message" ng-if="$ctrl.isMyAssignee()">
+                <i class="material-icons">chat</i>
+                <md-tooltip>Send message to {{$ctrl.client.first_name}}</md-tooltip>
+              </a>
+            </div>
+            <div ng-show="$ctrl.isEditCoach" layout="row" layout-align="begin center">
+              <md-button class="md-icon-button md-primary" aria-label="default" ng-click="$ctrl.setMeAsCoach()">
+                <i class="material-icons">keyboard_return</i>
+                <md-tooltip>Assign yourself</md-tooltip>
+              </md-button>
+              <md-autocomplete flex="15"
+                  md-selected-item="$ctrl.assigned_coach"
+                  md-search-text="$ctrl.searchCoach"
+                  md-items="item in $ctrl.queryCoaches($ctrl.searchCoach)"
+                  md-item-text="$ctrl.coachName(item)"
+                  md-min-length="0"
+                  md-floating-label="Select a coach">
+                <md-item-template>
+                  <span md-highlight-text="$ctrl.searchCoach">{{$ctrl.coachName(item)}}</span>
+                </md-item-template>
+              </md-autocomplete>
+              <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateCoach()">
+                <i class="material-icons">check</i>
+              </md-button>
+              <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.editCoach(false)">
+                <i class="material-icons">close</i>
+              </md-button>              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div layout="column">

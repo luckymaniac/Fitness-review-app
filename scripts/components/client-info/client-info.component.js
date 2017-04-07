@@ -6,7 +6,8 @@ let clientInfoComponent = {
   restrict: 'E',
   bindings: {
     client: '<',
-    onUpdate: '&'
+    onUpdate: '&',
+    onUpdateCoach: '&'
   },
   template,
   controller

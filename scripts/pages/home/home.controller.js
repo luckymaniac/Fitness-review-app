@@ -13,7 +13,7 @@ class HomeController {
       size: 10,
       sort: '-created_at',
       search: null,
-      scope: 'all'
+      scope: 'just_signed_in'
     };
     this.total = 0;
 

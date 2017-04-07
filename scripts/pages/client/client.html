@@ -2,7 +2,9 @@
 <main class="client-page">
   <md-content>
     <etp-client-info client="$ctrl.client"
-                    on-update="$ctrl.onGoalUpdate($event)"></etp-client-info>
+                    on-update="$ctrl.onGoalUpdate($event)"
+                    on-update-coach="$ctrl.onCoachUpdate($event)"></etp-client-info>
+    <etp-coach-selector></etp-coach-selector>
     <etp-plan-edit client="$ctrl.client"
                   plan="$ctrl.macro_plan"
                   on-update="$ctrl.onPlanUpdate($event)"

@@ -1,11 +1,8 @@
 class ClientInfoController {
-  constructor(Auth, Goal) {
+  constructor(Auth, Goal, Coach) {
     this._Auth = Auth;
     this._Goal = Goal;
-  }
-
-  $onInit() {
-    this.init();
+    this._Coach = Coach;
   }
 
   $onChanges(changes) {
@@ -23,18 +20,29 @@ class ClientInfoController {
       50: "Above 50"
     };
 
-    const goal_id = _.get(this.client, 'bio.goal_id');
     this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
     this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
 
+    this.supers = [];
+
+    this.isEditable = this._Auth.me.is_super;
+    this.isEditGoal = false;
+    this.isEditGoalWeight = false;
+    this.isEditCoach = false;
+
+    this.load();
+  }
+
+  load() {
+    const goal_id = _.get(this.client, 'bio.goal_id');
     this._Goal.list().then(res => {
       this.goals = res.goals;
       this.goal = _.find(this.goals, {id: goal_id});
     });
 
-    this.isEditable = this._Auth.me.is_super;
-    this.isEditGoal = false;
-    this.isEditGoalWeight = false;
+    this._Coach.supers().then(res => {
+      this.supers = _.get(res, 'coaches', []);
+    });
   }
 
   toggle() {
@@ -81,8 +89,39 @@ class ClientInfoController {
     this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
     this.editGoalWeight(false);
   }
+
+  isMyAssignee() {
+    return _.get(this.client, 'setting.coach.id') === this._Auth.me.id;
+  }
+
+  editCoach(v = true) {
+    this.isEditCoach = v;
+    this.assigned_coach = v ? _.find(this.supers, {id: _.get(this.client, 'setting.coach.id', null)}) : null;
+  }
+
+  queryCoaches(search) {
+    const q = search ? search.toLowerCase() : '';
+    return this.supers.filter(o => this.coachName(o).toLowerCase().indexOf(q) >= 0);
+  }
+
+  coachName(item) {
+    return item ? item.first_name + ' ' + item.last_name : '';
+  }
+
+  updateCoach() {
+    const data = {
+      coach_id: this.assigned_coach ? this.assigned_coach.id : null
+    };
+    this.onUpdateCoach({
+      $event: data
+    });
+  }
+
+  setMeAsCoach() {
+    this.assigned_coach = _.find(this.supers, {id: this._Auth.me.id});
+  }
 }
 
-ClientInfoController.$inject = ['Auth', 'Goal'];
+ClientInfoController.$inject = ['Auth', 'Goal', 'Coach'];
 
 export default ClientInfoController;

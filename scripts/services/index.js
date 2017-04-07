@@ -20,6 +20,8 @@ import GoalRecordService from './goal_record.service';
 
 import MessageService from './message.service';
 
+import CoachService from './coach.service';
+
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', [])
 
@@ -42,6 +44,8 @@ let servicesModule = angular.module('app.services', [])
 .service('GoalRecord', GoalRecordService)
 
 .service('Message', MessageService)
+
+.service('Coach', CoachService)
   
 .name;
 
