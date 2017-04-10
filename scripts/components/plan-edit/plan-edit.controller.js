@@ -109,17 +109,10 @@ class PlanEditController {
   }
 
   isPlanUpdatable() {
-    if (!this.plan || !this.isEditable()) return false;
-    return !this.planForm.$invalid;
+    return this.plan ? !this.planForm.$invalid : false;
   }
 
   isSuper() {
-    return this._Auth.me.is_super;
-  }
-
-  isEditable() {
-    if (this.plan && this.plan.coach && this.plan.coach.id !== this._Auth.me.id) return false;
-
     return this._Auth.me.is_super;
   }
 

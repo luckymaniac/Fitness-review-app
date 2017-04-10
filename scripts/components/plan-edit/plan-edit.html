@@ -5,12 +5,11 @@
     </div>
     <div flex="65" flex-offset="5" layout="row" layout-align="space-between center">
       <div flex layout="row">
-        <md-subheader>{{$ctrl.isEditable() ? 'New Plan' : 'Current Plan'}}</md-subheader>
+        <md-subheader>{{$ctrl.plan.id ? 'New Plan' : 'Update Plan'}}</md-subheader>
         <md-button class="etp-primary-button" 
                   ng-click="$ctrl.addNew()"
                   ng-disabled="!$ctrl.plan.id">New</md-button>
-        <md-button class="etp-primary-button md-raised" 
-                  ng-show="$ctrl.isEditable()"
+        <md-button class="etp-primary-button md-raised"
                   ng-click="$ctrl.update()"
                   ng-disabled="!$ctrl.isPlanUpdatable()">{{$ctrl.plan.id ? "Update" : "Create"}}</md-button>
       </div>
@@ -64,6 +63,7 @@
         <span flex="15" layout layout-align="begin center">
           <md-datepicker ng-model="$ctrl.plan.start_date"
                         ng-if="$ctrl.isSuper()"
+                        ng-disabled="$ctrl.plan.id"
                         md-placeholder="Enter start date"></md-datepicker>
           <span ng-if="!$ctrl.isSuper()">{{$ctrl.client.current_plan.start_date}}</span>
         </span>
@@ -111,7 +111,6 @@
         <label flex="10" layout layout-align="end center">Note</label>
         <md-input-container flex="90">
           <textarea ng-model="$ctrl.plan.notes"
-                    ng-disabled="!$ctrl.isEditable()"
                     aria-label="notes"
                     required></textarea>
         </md-input-container>
@@ -130,7 +129,6 @@
               <td md-cell ng-repeat="level in $ctrl.levels">
                 <md-input-container>
                   <input ng-model="$ctrl.plan[$ctrl.planKey(level, prop)]" 
-                        ng-disabled="!$ctrl.isEditable()"
                         ng-blur="$ctrl.onChangePlan($ctrl.planKey(level, prop))";
                         type="number" 
                         min="0" 
