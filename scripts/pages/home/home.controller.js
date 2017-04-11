@@ -30,10 +30,6 @@ class HomeController {
     });
   }
 
-  onSelect(item) {
-    this._$state.go('client', item);
-  }
-
   onSearch() {
     this.load();
   }

@@ -53,6 +53,11 @@ body {
 a {
   color: $nav-text-color;
   text-decoration: none;
+
+  &.etp-link {
+    color: $primary-color;
+    text-decoration: underline;
+  }
 }
 
 .sub-title {
