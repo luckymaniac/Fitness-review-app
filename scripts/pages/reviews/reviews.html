@@ -39,7 +39,7 @@
           <tr md-row ng-repeat="item in $ctrl.macro_reviews" ng-click="$ctrl.onSelect(item)" class="macro-review">
             <td md-cell>{{item.request_date | simpleDate}}</td>
             <td md-cell>
-              <a ui-sref="client({id: item.client.id})">
+              <a ui-sref="client({id: item.client.id})" target="_blank">
                 {{item.client.first_name}} {{item.client.last_name}}
               </a>
             </td>
@@ -53,10 +53,11 @@
             </td>
             <td md-cell class="actions">
               <span ng-if="item.pending">
-                <md-button ui-sref="review({id: item.id})"
+                <a ui-sref="review({id: item.id})"
                           ng-if="$ctrl.isSuper()"
-                          class="etp-primary-button"
-                          aria-label="reply">Reply</md-button>
+                          class="md-button etp-primary-button"
+                          target="_blank"
+                          aria-label="reply">Reply</a>
               </span>
               <span ng-if="!item.pending">
                 <md-button ui-sref="review({id: item.id})"
