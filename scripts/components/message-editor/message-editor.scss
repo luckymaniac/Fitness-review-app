@@ -5,6 +5,10 @@
     &.head {
       .md-subheader {
         background-color: $bg-color;
+
+        a {
+          color: $primary-color;
+        }
       }
 
       span {

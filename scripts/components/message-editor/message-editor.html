@@ -1,6 +1,11 @@
 <div class="etp-message-editor" layout-padding>
   <section class="head" layout="row" layout-align="space-between center">
-    <md-subheader>Message to {{$ctrl.client.first_name}} {{$ctrl.client.last_name}}</md-subheader>
+    <md-subheader>
+      Message to 
+      <a ui-sref="client({id: $ctrl.client.id})">
+        {{$ctrl.client.first_name}} {{$ctrl.client.last_name}}
+      </a>
+    </md-subheader>
     <span ng-click="$ctrl.toggle()">
       <i class="material-icons" ng-show="!$ctrl.isExpanded">keyboard_arrow_down</i>
       <i class="material-icons" ng-show="$ctrl.isExpanded">keyboard_arrow_up</i>
