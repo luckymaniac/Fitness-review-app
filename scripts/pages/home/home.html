@@ -9,6 +9,14 @@
       </div>
       <div flex="60" layout layout-align="end">
         <md-input-container>
+          <md-select ng-model="$ctrl.query.membership" 
+                    md-on-close="$ctrl.onScopeChange()"
+                    aria-label="scope">
+            <md-option ng-value="null">Show all</md-option>
+            <md-option ng-repeat="item in $ctrl.memberships" ng-value="{{item.id}}">{{item.name}}</md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container>
           <md-select ng-model="$ctrl.query.scope" 
                     md-on-close="$ctrl.onScopeChange()"
                     aria-label="scope">

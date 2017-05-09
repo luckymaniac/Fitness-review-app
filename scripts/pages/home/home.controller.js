@@ -1,8 +1,9 @@
 class HomeController {
-  constructor($state, Client) {
+  constructor($state, Client, Membership) {
     window._$ctrl = this;
     this._$state = $state;
     this._Client = Client;
+    this._Membership = Membership;
 
     this.init();
   }
@@ -13,9 +14,18 @@ class HomeController {
       size: 10,
       sort: '-created_at',
       search: null,
-      scope: 'just_signed_in'
+      scope: 'just_signed_in',
+      membership: null
     };
     this.total = 0;
+
+    this._Membership.list()
+      .then(res => {
+        if (res) {
+          console.log(res);
+          this.memberships = res.memberships;
+        }
+      });
 
     this.load();
   }
@@ -56,6 +66,6 @@ class HomeController {
 
 }
 
-HomeController.$inject = ['$state', 'Client'];
+HomeController.$inject = ['$state', 'Client', 'Membership'];
 
 export default HomeController;
