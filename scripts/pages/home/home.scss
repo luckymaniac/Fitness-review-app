@@ -1,6 +1,12 @@
 @import '../../common/variables';
 
 .home-page {
+  .filters {
+    md-input-container {
+      margin-left: 20px;
+    }
+  }
+
   .md-table {
     .md-body {
       .md-row {

@@ -22,7 +22,6 @@ class HomeController {
     this._Membership.list()
       .then(res => {
         if (res) {
-          console.log(res);
           this.memberships = res.memberships;
         }
       });

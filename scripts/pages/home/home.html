@@ -7,7 +7,7 @@
       <div flex="40">
         <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
       </div>
-      <div flex="60" layout layout-align="end">
+      <div flex="60" layout layout-align="end" class="filters">
         <md-input-container>
           <md-select ng-model="$ctrl.query.membership" 
                     md-on-close="$ctrl.onScopeChange()"
