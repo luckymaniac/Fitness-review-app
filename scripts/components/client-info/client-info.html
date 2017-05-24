@@ -56,20 +56,14 @@
           </span>
           <span flex="60" ng-show="$ctrl.isEditGoal" layout="column">
             <div layout="row" layout-align="begin center">
-              <md-select ng-model="$ctrl.goal" aria-label="goals">
+              <md-select ng-model="$ctrl.goal" aria-label="goals" flex="100">
                 <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal">
                   {{goal.description}}
                 </md-option>
               </md-select>
-              <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateGoal()" flex-offset="5">
-                <i class="material-icons">check</i>
-              </md-button>
-              <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancelGoal()">
-                <i class="material-icons">close</i>
-              </md-button>
             </div>
-            <div layout="row" layout-align="begin center" ng-show="$ctrl.goal.phases">
-              <md-slider-container flex="100">
+            <div layout="row" layout-align="end center">
+              <md-slider-container flex="50" ng-show="$ctrl.goal.phases">
                 <md-slider 
                   flex
                   min="1"
@@ -79,6 +73,14 @@
                   md-discrete
                 ></md-slider>
               </md-slider-container>
+              <div flex="50" layout layout-align="end center">
+                <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateGoal()" flex-offset="5">
+                  <i class="material-icons">check</i>
+                </md-button>
+                <md-button class="md-icon-button md-accent" aria-label="close" ng-click="$ctrl.cancelGoal()">
+                  <i class="material-icons">close</i>
+                </md-button>
+              </div>
             </div>
           </span>
         </div>
@@ -87,8 +89,15 @@
           <span flex="60"
                 layout="row"
                 layout-align="begin center"
-                ng-show="!$ctrl.isEditGoalWeight">
-            <span>{{$ctrl.client.bio.goal_weight || 'Not specified'}}</span>
+                ng-show="!$ctrl.isEditGoalWeight"
+          >
+            <span ng-show="$ctrl.client.bio.goal_weight" layout layout-align="begin center">
+              <i class="material-icons">
+                {{$ctrl.client.bio.is_up_goal_weight ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}
+              </i>
+              {{$ctrl.client.bio.goal_weight}}
+            </span>
+            <span ng-show="!$ctrl.client.bio.goal_weight">Not specified</span>
             <md-button class="md-icon-button md-primary" 
                        aria-label="edit"
                        flex-offset="5"
@@ -99,6 +108,9 @@
           </span>
           <span flex="60" layout="row" layout-align="begin center" ng-show="$ctrl.isEditGoalWeight">
             <md-input-container>
+              <md-icon class="btn-up-goal-weight" ng-click="$ctrl.reverseUpGoalWeight()">
+                {{$ctrl.is_up_goal_weight ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}
+              </md-icon>
               <input ng-model="$ctrl.goal_weight" type="number" step=".1" aria-label="goal_weight">
             </md-input-container>
             <md-button class="md-icon-button md-primary" aria-label="check" ng-click="$ctrl.updateGoalWeight()" flex-offset="5">

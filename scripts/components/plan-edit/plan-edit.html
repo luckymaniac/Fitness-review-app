@@ -134,6 +134,7 @@
                   <input ng-model="$ctrl.plan[$ctrl.planKey(level, prop)]" 
                         ng-blur="$ctrl.onChangePlan($ctrl.planKey(level, prop))";
                         type="number" 
+                        step="5"
                         min="0" 
                         max="{{$ctrl.max[prop]}}" 
                         aria-label="{{$ctrl.planKey(level, prop)}}"

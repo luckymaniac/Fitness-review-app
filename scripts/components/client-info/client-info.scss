@@ -29,6 +29,17 @@
       .to-message {
         color: $primary-color;
       }
+
+      md-slider {
+        min-width: 10px;
+      }
+
+      .btn-up-goal-weight {
+        color: $primary-color;
+        cursor: pointer;
+        border: 1px solid $border-color;
+        outline: none;
+      }
     }
   }
 }

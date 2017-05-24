@@ -20,9 +20,6 @@ class ClientInfoController {
       50: "Above 50"
     };
 
-    this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
-    this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
-
     this.supers = [];
 
     this.isEditable = this._Auth.me.is_super;
@@ -34,10 +31,9 @@ class ClientInfoController {
   }
 
   load() {
-    const goal_id = _.get(this.client, 'bio.goal_id');
     this._Goal.list().then(res => {
       this.goals = res.goals;
-      this.goal = _.find(this.goals, {id: goal_id});
+      this.editGoal(false);
     });
 
     this._Coach.supers().then(res => {
@@ -50,11 +46,11 @@ class ClientInfoController {
   }
 
   editGoal(v = true) {
-    this.isEditGoal = v;
-  }
+    const goal_id = _.get(this.client, 'bio.goal_id');
+    this.goal = _.find(this.goals, {id: goal_id});
+    this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
 
-  editGoalWeight(v = true) {
-    this.isEditGoalWeight = v;
+    this.isEditGoal = v;
   }
 
   updateGoal() {
@@ -69,15 +65,24 @@ class ClientInfoController {
   }
 
   cancelGoal() {
-    const goal_id = _.get(this.client, 'bio.goal_id');
-    this.goal = _.find(this.goals, {id: goal_id});
-    this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
     this.editGoal(false);
+  }
+
+  editGoalWeight(v = true) {
+    this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
+    this.is_up_goal_weight = _.get(this.client, 'bio.is_up_goal_weight') || false;
+
+    this.isEditGoalWeight = v;
+  }
+
+  reverseUpGoalWeight() {
+    this.is_up_goal_weight = !this.is_up_goal_weight;
   }
 
   updateGoalWeight() {
     const data = {
-      goal_weight: this.goal_weight
+      goal_weight: this.goal_weight,
+      is_up_goal_weight: this.is_up_goal_weight
     };
 
     this.onUpdate({
@@ -86,7 +91,6 @@ class ClientInfoController {
   }
 
   cancelGoalWeight() {
-    this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
     this.editGoalWeight(false);
   }
 
