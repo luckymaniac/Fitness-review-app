@@ -40,7 +40,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isMacroReview(item)">
-            <td colspan="9"  ng-class="{pending: item.pending}">
+            <td colspan="9"  ng-class="{pending: item.is_pending}">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -49,17 +49,11 @@
                 </div>
                 <div flex="85">
                   <span layout layout-align="center center">REVIEW REQUESTED {{item.is_auto ? "(AUTO)" : ""}}</span>
-                  <md-divider ng-if="!item.pending"></md-divider>
-                  <p ng-if="!item.pending" layout="row" layout-align="space-between center">
-                    <i>{{item.notes}}</i>
-                    <span>{{item.coach.first_name}} {{item.coach.last_name}}</span>
+                  <md-divider></md-divider>
+                  <p space-between center">
+                    <i>{{item.reason}}</i>
                   </p>
                 </div>
-                <span flex="5" layout layout-align="center center">
-                  <a ui-sref="review(item)" class="btn-link">
-                    <i class="material-icons">edit</i>
-                  </a>
-                </span>
               </div>
             </td>
           </tr>
