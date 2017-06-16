@@ -7,6 +7,7 @@ import Reviews    from './reviews';
 import Client     from './client';
 import Assignees  from './assignees';
 import Message    from './message';
+import Losers     from './losers';
 
 let pageModule = angular.module('app.pages', [
   Login,
@@ -14,9 +15,9 @@ let pageModule = angular.module('app.pages', [
   Client,
   Account,
   Reviews,
-  // Review,
   Assignees,
-  Message
+  Message,
+  Losers
 ])
 
 .name;

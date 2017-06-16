@@ -1,10 +1,11 @@
 <div class="etp-main-menu">
-  <md-nav-bar md-selected-nav-item="$ctrl.curentState" nav-bar-aria-label="navigation links" ng-if="$ctrl">
+  <md-nav-bar md-selected-nav-item="$ctrl.curentState" nav-bar-aria-label="navigation links">
     <md-nav-item md-nav-sref="home" name="home">Review clients</md-nav-item>
     <md-nav-item md-nav-sref="reviews" name="reviews">Review requests</md-nav-item>
-    <md-nav-item md-nav-sref="assignees" name="assignees">
+    <md-nav-item md-nav-sref="assignees" name="assignees" ng-show="$ctrl.isSuper()">
       Your assignees
       <span class='badge' ng-show="$ctrl.assignee_badge">{{$ctrl.assignee_badge}}</span>
     </md-nav-item>
+    <md-nav-item md-nav-sref="losers" name="losers" ng-show="$ctrl.isSuper()">Goal Losers</md-nav-item>
   </md-nav-bar>
 </div>

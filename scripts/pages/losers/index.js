@@ -1,17 +1,17 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import reviewComponent from './review.component';
+import losersComponent from './losers.component';
 
-let reviewModule = angular.module('review', [
+let losersModule = angular.module('losers', [
   uiRouter
 ])
 
 .config(($stateProvider) => {
   "ngInject";
   $stateProvider
-    .state('review', {
-      url: '/reviews/:id',
-      component: 'review',
+    .state('losers', {
+      url: '/losers',
+      component: 'losers',
       resolve: {
         auth: (Auth) => {
           return Auth.ensureAuth();
@@ -20,8 +20,8 @@ let reviewModule = angular.module('review', [
     });
 })
 
-.component('review', reviewComponent)
+.component('losers', losersComponent)
   
 .name;
 
-export default reviewModule;
+export default losersModule;

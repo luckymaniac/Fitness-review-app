@@ -1,7 +1,11 @@
 let simpleDateFilter = function() {
-  return function(dateStr) {
+  return function(dateStr, local) {
     if (!dateStr) return "";
-    return moment.utc(new Date(dateStr)).format("MMM DD");
+    if (local) {
+      return moment(new Date(dateStr)).format("MMM DD");
+    } else {
+      return moment.utc(new Date(dateStr)).format("MMM DD");
+    }
   };
 };
 
