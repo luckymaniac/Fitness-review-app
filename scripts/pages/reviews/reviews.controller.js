@@ -64,13 +64,14 @@ class ReviewsController {
   showGoal(client) {
     let result = '';
 
-    const goal_id = _.get(client, 'bio.goal_id', null);
+    const goal_id = _.get(client, 'client_goal.goal_id', null);
+    console.log(client);
     if (goal_id !== null) {
       const goal = _.find(this.goals, {id: goal_id});
       if (goal) {
         result = goal.description.toUpperCase();
         if (goal.phases) {
-          const phase = _.get(client, 'bio.goal_phase') || 1;
+          const phase = _.get(client, 'client_goal.phase') || 1;
           result += ' - Phase ' + phase;
         }
       }
