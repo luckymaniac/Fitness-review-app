@@ -4,7 +4,6 @@ import Home       from './home';
 import Login      from './login';
 import Account    from './account';
 import Reviews    from './reviews';
-import Review     from './review';
 import Client     from './client';
 import Assignees  from './assignees';
 import Message    from './message';
@@ -15,7 +14,7 @@ let pageModule = angular.module('app.pages', [
   Client,
   Account,
   Reviews,
-  Review,
+  // Review,
   Assignees,
   Message
 ])

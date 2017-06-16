@@ -33,7 +33,7 @@ class ClientInfoController {
   load() {
     this._Goal.list().then(res => {
       this.goals = res.goals;
-      this.editGoal(false);
+      this.goal = _.find(this.goals, {id: _.get(this.client, 'client_goal.goal_id')});
     });
 
     this._Coach.supers().then(res => {
@@ -46,17 +46,15 @@ class ClientInfoController {
   }
 
   editGoal(v = true) {
-    const goal_id = _.get(this.client, 'bio.goal_id');
-    this.goal = _.find(this.goals, {id: goal_id});
-    this.goal_phase = _.get(this.client, 'bio.goal_phase') || 1;
+    this.client_goal = _.cloneDeep(this.client.client_goal);
 
     this.isEditGoal = v;
   }
 
   updateGoal() {
     const data = {
-      goal_id: this.goal.id,
-      goal_phase: this.goal.phases ? this.goal_phase : null
+      goal_id: this.client_goal.goal_id,
+      phase: this.goal.phases ? this.client_goal.phase : null
     };
 
     this.onUpdate({
@@ -69,24 +67,20 @@ class ClientInfoController {
   }
 
   editGoalWeight(v = true) {
-    this.goal_weight = _.get(this.client, 'bio.goal_weight') || 0;
-    this.is_up_goal_weight = _.get(this.client, 'bio.is_up_goal_weight') || false;
+    this.client_goal_weight = _.cloneDeep(this.client.client_goal);
 
     this.isEditGoalWeight = v;
   }
 
   reverseUpGoalWeight() {
-    this.is_up_goal_weight = !this.is_up_goal_weight;
+    if (this.client_goal_weight) {
+      this.client_goal_weight.is_up = !this.client_goal_weight.is_up;
+    }
   }
 
   updateGoalWeight() {
-    const data = {
-      goal_weight: this.goal_weight,
-      is_up_goal_weight: this.is_up_goal_weight
-    };
-
     this.onUpdate({
-      $event: data
+      $event: this.client_goal_weight
     });
   }
 
