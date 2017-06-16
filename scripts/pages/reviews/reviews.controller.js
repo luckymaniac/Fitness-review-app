@@ -65,7 +65,7 @@ class ReviewsController {
     let result = '';
 
     const goal_id = _.get(client, 'client_goal.goal_id', null);
-    console.log(client);
+
     if (goal_id !== null) {
       const goal = _.find(this.goals, {id: goal_id});
       if (goal) {

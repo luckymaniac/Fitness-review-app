@@ -1,4 +1,4 @@
-class LosersController {
+class GoalChangesController {
   constructor($state, Client, Membership, Goal) {
     window._$ctrl = this;
     this._$state = $state;
@@ -85,6 +85,6 @@ class LosersController {
   }
 }
 
-LosersController.$inject = ['$state', 'Client', 'Membership', 'Goal'];
+GoalChangesController.$inject = ['$state', 'Client', 'Membership', 'Goal'];
 
-export default LosersController;
+export default GoalChangesController;
