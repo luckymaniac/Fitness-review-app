@@ -101,7 +101,6 @@ class PlanEditController {
       this._MacroPlan.weekly_goals(),
       this._AutoReview.list()
     ]).then(res => {
-      console.log(res);
       this.weekly_goals = res[0].weekly_goals;
       this.auto_reviews = res[1].auto_reviews;
 
