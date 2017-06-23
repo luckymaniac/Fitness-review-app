@@ -73,18 +73,6 @@ class PlanEditController {
       .then(res => {
         this.macro_goals = res.macro_goals;
       });
-
-    this._MacroPlan.weekly_goals()
-      .then(res => {
-        if (res) {
-          this.weekly_goals = res.weekly_goals;
-        }
-      });
-
-    this._AutoReview.list()
-      .then(res => {
-        this.auto_reviews = res.auto_reviews;
-      });
   }
 
   load() {
@@ -97,6 +85,7 @@ class PlanEditController {
       this.plan.notes = '';
       this.plan.start_date = new Date();
       this.plan.auto_review_after = null;
+      this.plan.auto_review_id = null;
     }
 
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
@@ -108,8 +97,17 @@ class PlanEditController {
         }
       });
 
-    this.initSuperDayList(this.weekly_goals);
-    this.initAutoReviewList();
+    Promise.all([
+      this._MacroPlan.weekly_goals(),
+      this._AutoReview.list()
+    ]).then(res => {
+      console.log(res);
+      this.weekly_goals = res[0].weekly_goals;
+      this.auto_reviews = res[1].auto_reviews;
+
+      this.initSuperDayList(this.weekly_goals);
+      this.initAutoReviewList();
+    });
   }
 
   toggle() {
@@ -173,9 +171,8 @@ class PlanEditController {
   addSuperDay(search) {
     if (!search || search.length != 7) return;
     const q = search.toUpperCase();
-
     if (_.find(this.super_day_list, {goals: q})) return;
-    // console.log(this.macro_goals);
+
     const arr = _.filter(q.split(''), key => {
       return _.find(this.macro_goals, {key});
     });
@@ -199,7 +196,7 @@ class PlanEditController {
   // Handle Auto-Review functions
   initAutoReviewList() {
     if (this.plan.auto_review_id) {
-      this.auto_review = _.find(this.auto_review || [], {id: this.plan.auto_review_id}, null)
+      this.auto_review = _.find(this.auto_reviews || [], {id: this.plan.auto_review_id});
     }
   }
 
