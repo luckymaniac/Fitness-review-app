@@ -24,6 +24,8 @@ import CoachService from './coach.service';
 
 import MembershipService from './membership.service';
 
+import AutoReviewService from './auto_review.service';
+
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', [])
 
@@ -50,6 +52,8 @@ let servicesModule = angular.module('app.services', [])
 .service('Coach', CoachService)
 
 .service('Membership', MembershipService)
+
+.service('AutoReview', AutoReviewService)
   
 .name;
 

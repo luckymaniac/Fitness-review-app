@@ -1,24 +1,23 @@
 class PlanEditController {
-  constructor(Auth, TrendRecord, MacroGoal, MacroPlan, AppConstants) {
+  constructor(Auth, TrendRecord, MacroGoal, MacroPlan, AutoReview, AppConstants) {
     this._Auth = Auth;
     this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
     this._MacroGoal = MacroGoal;
     this._MacroPlan = MacroPlan;
-  }
+    this._AutoReview = AutoReview;
 
-  $onInit() {
+    this.init();
   }
 
   $onChanges(changes) {
-    this.init();
+    this.load();
   }
 
   init() {
     this.isExpanded = true;
     this.todayStr = moment().format("YYYY-MM-DD");
     this.today = new Date();
-    if (!this.client) return;
 
     this.max = this._AppConstants.trend_max_data;
     this.levels = ['low', 'medium', 'high', 'super'];
@@ -70,13 +69,34 @@ class PlanEditController {
       ['high_fat', 'medium_fat']
     ];
 
+    this._MacroGoal.list()
+      .then(res => {
+        this.macro_goals = res.macro_goals;
+      });
+
+    this._MacroPlan.weekly_goals()
+      .then(res => {
+        if (res) {
+          this.weekly_goals = res.weekly_goals;
+        }
+      });
+
+    this._AutoReview.list()
+      .then(res => {
+        this.auto_reviews = res.auto_reviews;
+      });
+  }
+
+  load() {
+    if (!this.client) return;
+
     // initialize plan object
     if (!this.plan) {
       this.plan = _.clone(this.client.current_plan || this.default_plan[_.get(this.client, 'bio.gender', 'F')]);
       this.plan.id = null;
       this.plan.notes = '';
       this.plan.start_date = new Date();
-      this.plan.auto_review_after = 14;
+      this.plan.auto_review_after = null;
     }
 
     this._TrendRecord.getByClient(this.client.id, this.todayStr)
@@ -87,17 +107,9 @@ class PlanEditController {
           });
         }
       });
-    this._MacroGoal.list()
-      .then(res => {
-        this.macro_goals = res.macro_goals;
-      });
 
-    this._MacroPlan.weekly_goals()
-      .then(res => {
-        if (res) {
-          this.initSuperDayList(res.weekly_goals);
-        }
-      });
+    this.initSuperDayList(this.weekly_goals);
+    this.initAutoReviewList();
   }
 
   toggle() {
@@ -138,6 +150,7 @@ class PlanEditController {
     }
   }
 
+  // Handle SUPER day functions
   initSuperDayList(list) {
     this.super_day_list = _.cloneDeep(list);
     this.super_day = _.find(list, {goals: this.plan.weekly_goals});
@@ -182,8 +195,33 @@ class PlanEditController {
       this.plan.weekly_goals = item.goals;
     }
   }
+
+  // Handle Auto-Review functions
+  initAutoReviewList() {
+    if (this.plan.auto_review_id) {
+      this.auto_review = _.find(this.auto_review || [], {id: this.plan.auto_review_id}, null)
+    }
+  }
+
+  queryAutoReview(search) {
+    const q = search.toLowerCase();
+    return _.filter(this.auto_reviews || [], item => {
+      return item.name.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+
+  setAutoReview(item) {
+    if (!item) {
+      this.plan.auto_review_id = null;
+      this.plan.auto_review_after = null;
+    } else {
+      this.plan.auto_review_id = item.id;
+      this.plan.auto_review_after = item.days;
+      this.plan.notes = item.note;
+    }
+  }
 }
 
-PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'MacroPlan', 'AppConstants'];
+PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'MacroPlan', 'AutoReview', 'AppConstants'];
 
 export default PlanEditController;

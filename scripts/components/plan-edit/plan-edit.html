@@ -86,29 +86,22 @@
           </md-item-template>
         </md-autocomplete>
 
-        <label flex="20" layout layout-align="end center">Auto review after</label>
-        <md-input-container flex="20">
-          <md-select ng-model="$ctrl.plan.auto_review_after" aria-label="plan.auto_review_after">
-            <md-option>
-              No auto review
-            </md-option>
-            <md-option ng-value="3">
-              3 Days request
-            </md-option>
-            <md-option ng-value="5">
-              5 Days request
-            </md-option>
-            <md-option ng-value="7">
-              One week request
-            </md-option>
-            <md-option ng-value="14">
-              Two weeks request
-            </md-option>
-            <md-option ng-value="30">
-              One month request
-            </md-option>
-          </md-select>
-        </md-input-container>
+        <label flex="20" layout layout-align="end center">Auto review</label>
+        <md-autocomplete flex="20"
+            md-no-cache="true"
+            md-selected-item="$ctrl.auto_review"
+            md-search-text="$ctrl.searchReview"
+            md-items="item in $ctrl.queryAutoReview($ctrl.searchReview)"
+            md-selected-item-change="$ctrl.setAutoReview(item)"
+            md-item-text="item.name"
+            md-min-length="0"
+            md-clear-button="true"
+            md-require-match
+            md-floating-label="Select auto review">
+          <md-item-template>
+            <span md-highlight-text="$ctrl.searchReview">{{item.name}}</span>
+          </md-item-template>
+        </md-autocomplete>
       </div>
       <div class="values" layout="row">
         <label flex="10" layout layout-align="end center">Note</label>
