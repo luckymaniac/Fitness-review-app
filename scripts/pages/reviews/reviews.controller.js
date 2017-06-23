@@ -13,8 +13,9 @@ class ReviewsController {
       page: 1,
       size: 10,
       search: null,
-      scope: 'all',
-      goal_scope: 'all',
+      scope: null,
+      goal_scope: null,
+      auto_scope: null
     };
     this.total = 0;
 
