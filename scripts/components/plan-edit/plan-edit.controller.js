@@ -195,6 +195,7 @@ class PlanEditController {
   // Handle Auto-Review functions
   initAutoReviewList() {
     if (this.plan.auto_review_id) {
+      this.preventSetAutoReview = true;
       this.auto_review = _.find(this.auto_reviews || [], {id: this.plan.auto_review_id});
     }
   }
@@ -207,6 +208,11 @@ class PlanEditController {
   }
 
   setAutoReview(item) {
+    if (this.preventSetAutoReview) {
+      this.preventSetAutoReview = false;
+      return;
+    }
+
     if (!item) {
       this.plan.auto_review_id = null;
       this.plan.auto_review_after = null;
