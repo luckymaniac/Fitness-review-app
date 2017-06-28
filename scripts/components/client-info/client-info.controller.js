@@ -33,7 +33,7 @@ class ClientInfoController {
   load() {
     this._Goal.list().then(res => {
       this.goals = res.goals;
-      this.goal = _.find(this.goals, {id: _.get(this.client, 'client_goal.goal_id')});
+      this.current_goal = _.find(this.goals, {id: _.get(this.client, 'client_goal.goal_id')});
     });
 
     this._Coach.supers().then(res => {
@@ -46,15 +46,18 @@ class ClientInfoController {
   }
 
   editGoal(v = true) {
-    this.client_goal = _.cloneDeep(this.client.client_goal);
+    this.client_goal = {
+      goal: this.current_goal,
+      phase: this.client.client_goal ? this.client.client_goal.phase : null
+    };
 
     this.isEditGoal = v;
   }
 
   updateGoal() {
     const data = {
-      goal_id: this.client_goal.goal_id,
-      phase: this.goal.phases ? this.client_goal.phase : null
+      goal_id: this.client_goal.goal ? this.client_goal.goal.id : null,
+      phase: this.client_goal.goal && this.client_goal.goal.phases ? this.client_goal.phase : null
     };
 
     this.onUpdate({

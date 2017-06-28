@@ -43,7 +43,7 @@
           <label flex="40">Goal</label>
           <span flex="60" layout="row" ng-show="!$ctrl.isEditGoal" layout-align="begin center">
             <span>
-              {{$ctrl.goal.description}}
+              {{$ctrl.current_goal.description}}
               {{$ctrl.client.client_goal.phase ? '- Phase ' + $ctrl.client.client_goal.phase : ''}}
             </span>
             <md-button class="md-icon-button md-primary" 
@@ -56,18 +56,18 @@
           </span>
           <span flex="60" ng-show="$ctrl.isEditGoal" layout="column">
             <div layout="row" layout-align="begin center">
-              <md-select ng-model="$ctrl.client_goal.goal_id" aria-label="goals" flex="100">
-                <md-option ng-repeat="goal in $ctrl.goals" ng-value="goal.id">
-                  {{goal.description}}
+              <md-select ng-model="$ctrl.client_goal.goal" aria-label="goals" flex="100">
+                <md-option ng-repeat="item in $ctrl.goals" ng-value="item">
+                  {{item.description}}
                 </md-option>
               </md-select>
             </div>
             <div layout="row" layout-align="end center">
-              <md-slider-container flex="50" ng-show="$ctrl.goal.phases">
+              <md-slider-container flex="50" ng-show="$ctrl.client_goal.goal.phases">
                 <md-slider 
                   flex
                   min="1"
-                  max="{{$ctrl.goal.phases}}"
+                  max="{{$ctrl.client_goal.goal.phases}}"
                   ng-model="$ctrl.client_goal.phase"
                   aria-label="phase"
                   md-discrete
