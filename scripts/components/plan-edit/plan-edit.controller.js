@@ -1,7 +1,6 @@
 class PlanEditController {
-  constructor(Auth, TrendRecord, MacroGoal, MacroPlan, AutoReview, AppConstants) {
+  constructor(Auth, MacroGoal, MacroPlan, AutoReview, AppConstants) {
     this._Auth = Auth;
-    this._TrendRecord = TrendRecord;
     this._AppConstants = AppConstants;
     this._MacroGoal = MacroGoal;
     this._MacroPlan = MacroPlan;
@@ -22,12 +21,6 @@ class PlanEditController {
     this.max = this._AppConstants.trend_max_data;
     this.levels = ['low', 'medium', 'high', 'super'];
     this.props = ['protein', 'carbs', 'fat'];
-
-    this.average = {
-      protein: 0,
-      carbs: 0,
-      fat: 0
-    };
 
     this.default_plan = {
       M: {
@@ -87,15 +80,6 @@ class PlanEditController {
       this.plan.auto_review_after = null;
       this.plan.auto_review_id = null;
     }
-
-    this._TrendRecord.getByClient(this.client.id, this.todayStr)
-      .then(res => {
-        if (res.trend_records.length) {
-          _.each(this.average, (v, k) => {
-            this.average[k] = _.floor(_.sumBy(res.trend_records, k) / res.trend_records.length);
-          });
-        }
-      });
 
     Promise.all([
       this._MacroPlan.weekly_goals(),
@@ -224,6 +208,6 @@ class PlanEditController {
   }
 }
 
-PlanEditController.$inject = ['Auth', 'TrendRecord', 'MacroGoal', 'MacroPlan', 'AutoReview', 'AppConstants'];
+PlanEditController.$inject = ['Auth', 'MacroGoal', 'MacroPlan', 'AutoReview', 'AppConstants'];
 
 export default PlanEditController;

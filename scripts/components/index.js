@@ -8,6 +8,7 @@ import TrackLog from './track-log';
 import ClientInfo from './client-info';
 import PlanEdit from './plan-edit';
 import MessageEditor from './message-editor';
+import WeightChart from './weight-chart';
 
 let componentModule = angular.module('app.components', [
   Logo,
@@ -17,7 +18,8 @@ let componentModule = angular.module('app.components', [
   TrackLog,
   ClientInfo,
   PlanEdit,
-  MessageEditor
+  MessageEditor,
+  WeightChart
 ])
   
 .name;

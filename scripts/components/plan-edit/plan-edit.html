@@ -23,41 +23,10 @@
   <md-divider></md-divider>
 
   <section class="body" layout="row" ng-show="$ctrl.isExpanded">
-    <div flex="30" layout="column">
-      <div class="progress" layout="column" layout-padding>
-        <div layout="row" layout-align="space-between center">
-          <span class="label">PROTEINS</span>
-          <span layout="row">
-            <span class="average">{{$ctrl.average.protein}}</span>
-            <span class="max">/ {{$ctrl.max.protein}}g</span>
-          </span>
-        </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.protein / $ctrl.max.protein * 100}}"></md-progress-linear>
-      </div>
-
-      <div class="progress" layout="column" layout-padding>
-        <div layout="row" layout-align="space-between center">
-          <span class="label">CARBS</span>
-          <span layout="row">
-            <span class="average">{{$ctrl.average.carbs}} </span>
-            <span class="max"> / {{$ctrl.max.carbs}}g</span>
-          </span>
-        </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.carbs / $ctrl.max.carbs * 100}}"></md-progress-linear>
-      </div>
-
-      <div class="progress" layout="column" layout-padding>
-        <div layout="row" layout-align="space-between center">
-          <span class="label">FATS</span>
-          <span layout="row">
-            <span class="average">{{$ctrl.average.fat}} </span>
-            <span class="max"> / {{$ctrl.max.fat}}g</span>
-          </span>
-        </div>
-        <md-progress-linear md-mode="determinate" value="{{$ctrl.average.fat / $ctrl.max.fat * 100}}"></md-progress-linear>
-      </div>
+    <div flex="40" layout="column">
+      <etp-weight-chart client="$ctrl.client"></etp-weight-chart>
     </div>
-    <div flex="65" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
+    <div flex="55" flex-offset="5" layout="column" class="new-plan" ng-form name="$ctrl.planForm">
       <div class="values" layout="row">
         <label flex="10" layout layout-align="end center">Start Date</label>
         <span flex="15" layout layout-align="begin center">

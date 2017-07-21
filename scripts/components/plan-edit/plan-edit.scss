@@ -14,24 +14,6 @@
   }
 
   .body {
-    .progress {
-      font-size: 12px;
-
-      span {
-        &.label {
-          font-weight: 700;
-        }
-
-        &.max {
-          color: $light-text-color;
-        }
-
-        &.average {
-          color: $primary-color;
-        }
-      }
-    }
-
     .new-plan {
       .md-table {
         .md-head {

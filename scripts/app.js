@@ -3,6 +3,7 @@ import uiRouter from 'angular-ui-router';
 import angularAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
 import mdDataTable from 'angular-material-data-table';
+import 'angular-chart.js/dist/angular-chart';
 
 import 'angular-material/angular-material.css';
 import 'angular-material/layouts/angular-material.layout-attributes.css';
@@ -24,6 +25,7 @@ angular.module('app', [
     angularAnimate,
     angularMaterial,
     mdDataTable,
+    'chart.js',
     Services,
     UI,
     Components,
