@@ -81,18 +81,19 @@ class WeightChartController {
     let myWeight = 0;
     let goalWeight = 0;
     while (today >= date) {
-      this.labels.push(date);
-      const goal_record = _.find(goal_records, { date }, null);
-      const trend_record = _.find(trend_records, { trend_date: date }, null);
-      if (goal_record) {
+      const goal_record = _.findLast(goal_records, r => r.date == date);
+      const trend_record = _.findLast(trend_records, r => r.trend_date == date);
+      if (goal_record && goal_record.weight > 0) {
         goalWeight = goal_record.weight;
       }
       if (trend_record && trend_record.weight > 0) {
         myWeight = trend_record.weight;
       }
-
-      this.data[0].push(myWeight);
-      this.data[1].push(goalWeight);
+      if (myWeight > 0 && goalWeight >0) {
+        this.labels.push(date);
+        this.data[0].push(myWeight);
+        this.data[1].push(goalWeight);
+      }
 
       date = moment(new Date(date)).add(1, 'days').format('YYYY-MM-DD');
     }
