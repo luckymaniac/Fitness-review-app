@@ -26,13 +26,6 @@ class WeightChartController {
         point: {
           radius: 0
         }
-      },
-      scales: {
-        xAxes: [
-          {
-            display: false
-          }
-        ]
       }
     };
 
