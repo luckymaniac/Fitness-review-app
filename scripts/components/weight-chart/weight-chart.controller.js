@@ -95,7 +95,13 @@ class WeightChartController {
         this.data[1].push(goalWeight);
       }
 
-      date = moment(new Date(date)).add(1, 'days').format('YYYY-MM-DD');
+      let ddd = date.split('-');
+      let dd = new Date();
+      dd.setFullYear(parseInt(ddd[0]));
+      dd.setMonth(parseInt(ddd[1]) - 1);
+      dd.setDate(parseInt(ddd[2]));
+
+      date = moment(new Date(dd)).add(1, 'days').format('YYYY-MM-DD');
     }
   }
 }
