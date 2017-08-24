@@ -39,7 +39,11 @@
             <th md-column><span>Status</span></th>
         </thead>
         <tbody md-body>
-          <tr md-row ng-repeat="item in $ctrl.macro_reviews" ng-click="$ctrl.onSelect(item)" class="macro-review">
+          <tr md-row ng-repeat="item in $ctrl.macro_reviews" 
+              ng-click="$ctrl.onSelect(item)"
+              class="macro-review"
+              ng-class="{'is-auto':item.is_auto, 'is-from-auto-plan':item.is_from_auto_plan}"
+          >
             <td md-cell>{{item.request_date | simpleDate}}</td>
             <td md-cell>
               <a ui-sref="client({id: item.client.id})" target="_blank">

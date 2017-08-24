@@ -30,5 +30,17 @@
         text-decoration: underline;
       }
     }
+
+    &.is-auto {
+      td {
+        background-color: $msg-primary-color;
+      }
+    }
+
+    &.is-from-auto-plan {
+      td {
+        background-color: $msg-secondary-color;
+      }
+    }
   }
 }
