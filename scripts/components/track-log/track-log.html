@@ -21,6 +21,9 @@
             <th md-column>Carbs</th>
             <th md-column>Fats</th>
             <th md-column>Sodium</th>
+            <th md-column>Sugar</th>
+            <th md-column>Fiber</th>
+            <th md-column>RHR</th>
             <th md-column>Steps</th>
             <th md-column>Sleep</th>
             <th md-column>Calories</th>
@@ -32,7 +35,10 @@
             <td md-cell ng-class="$ctrl.getCellClass(item, 'protein')">{{item.protein}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'carbs')">{{item.carbs}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'fat')">{{item.fat}}</td>
-            <td md-cell ng-class="$ctrl.getCellClass(item, 'sodium')">{{item.sodium}}</td>
+            <td md-cell>{{item.sodium}}</td>
+            <td md-cell>{{item.sugar}}</td>
+            <td md-cell>{{item.fiber}}</td>
+            <td md-cell>{{item.rhr}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'steps')">{{item.steps}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'sleep_minutes')">{{item.sleep_minutes | formatMinutes}}</td>
             <td md-cell ng-class="$ctrl.getCellClass(item, 'calories_burned')">{{item.calories_burned}}</td>
@@ -40,7 +46,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isMacroReview(item)">
-            <td colspan="9"  ng-class="{pending: item.is_pending}">
+            <td colspan="12"  ng-class="{pending: item.is_pending}">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -59,7 +65,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isMacroPlan(item)" class="item-head">
-            <td colspan="9">
+            <td colspan="12">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date" ng-click="$ctrl.togglePlan(item)">
@@ -88,32 +94,32 @@
             <td md-cell>{{item.super_protein}}</td>
             <td md-cell>{{item.super_carbs}}</td>
             <td md-cell>{{item.super_fat}}</td>
-            <td md-cell colspan="5">SUPER</td>
+            <td md-cell colspan="8">SUPER</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body high" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.high_protein}}</td>
             <td md-cell>{{item.high_carbs}}</td>
             <td md-cell>{{item.high_fat}}</td>
-            <td md-cell colspan="5">HIGH</td>
+            <td md-cell colspan="8">HIGH</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body medium" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.medium_protein}}</td>
             <td md-cell>{{item.medium_carbs}}</td>
             <td md-cell>{{item.medium_fat}}</td>
-            <td md-cell colspan="5">MEDIUM</td>
+            <td md-cell colspan="8">MEDIUM</td>
           </tr>
           <tr md-row ng-if="$ctrl.isMacroPlan(item)" class="item-body low" ng-show="item.isExpanded">
             <td md-cell></td>
             <td md-cell>{{item.low_protein}}</td>
             <td md-cell>{{item.low_carbs}}</td>
             <td md-cell>{{item.low_fat}}</td>
-            <td md-cell colspan="5">LOW</td>
+            <td md-cell colspan="8">LOW</td>
           </tr>
 
           <tr ng-if="$ctrl.isClientNote(item)">
-            <td colspan="9">
+            <td colspan="12">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -134,7 +140,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isGoalRecord(item)">
-            <td colspan="9">
+            <td colspan="12">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
@@ -149,7 +155,7 @@
           </tr>
 
           <tr ng-if="$ctrl.isMessage(item)">
-            <td colspan="9" ng-class="{'is-reply': item.is_reply}">
+            <td colspan="12" ng-class="{'is-reply': item.is_reply}">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
                   <span class="item-date">
