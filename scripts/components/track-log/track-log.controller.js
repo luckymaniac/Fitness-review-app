@@ -93,6 +93,7 @@ class TrackLogController {
       const row = _.cloneDeep(o);
       row.date = moment(new Date(o.created_at)).format('YYYY-MM-DD');
       row.type = 'client-note';
+      row.workout_class = _.kebabCase(_.get(row, 'workout_type.title', ''));
       this.dataRows.push(row);
     });
     _.each(this.messages, o => {

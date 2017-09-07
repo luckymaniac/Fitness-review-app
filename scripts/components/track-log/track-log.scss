@@ -144,6 +144,13 @@
                 }
               }
             }
+
+            &.ask-a-coach {
+              td {
+                background-color: $note-ask-a-coach-bg-color;
+                font-style: italic;
+              }
+            }
           }
         }
 

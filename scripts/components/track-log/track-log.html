@@ -118,7 +118,9 @@
             <td md-cell colspan="8">LOW</td>
           </tr>
 
-          <tr ng-if="$ctrl.isClientNote(item)">
+          <tr ng-if="$ctrl.isClientNote(item)" 
+              ng-class="item.workout_class"
+          >
             <td colspan="12">
               <div layout="row">
                 <div flex="10" layout="row" layout-align="begin center">
