@@ -160,11 +160,6 @@ class TrackLogController {
     this.load();
   }
 
-  isNextable() {
-    const today = moment();
-    return !(today.year() === this.query.year && today.month() === this.query.month - 1);
-  }
-
   getCellClass(item, prop) {
     const goal = _.get(item, 'macro_goal.title', '').toLowerCase();
     const value = _.get(item, prop, 0);
