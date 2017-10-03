@@ -4,7 +4,7 @@ const AppConstants = {
   appName: 'Eat To Perform',
   appKey: '35.163.77.181.coach',
   trend_max_data: {
-    carbs: 600,
+    carbs: 999,
     fat: 200,
     protein: 300
   }
