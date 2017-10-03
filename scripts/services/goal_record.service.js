@@ -8,6 +8,10 @@ class GoalRecord extends API {
   toString() {
     return '/goal_records';
   }
+
+  timeline(clientId) {
+    return this._get(`/clients/${clientId}${this.toString()}/timeline`);
+  }
 }
 
 GoalRecord.$inject = ['AppConstants', '$http', '$httpParamSerializer'];

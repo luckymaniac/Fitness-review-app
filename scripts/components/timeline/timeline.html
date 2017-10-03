@@ -1,0 +1,23 @@
+<div class="etp-timeline">
+  <ul>
+    <li ng-repeat="item in $ctrl.goal_records">
+      <div class="desc">
+        <div layout="column">
+          <div layout="row" layout-align="space-between center">
+            <label>Goal</label>
+            <span>{{item.goal}}</span>
+          </div>
+          <div layout="row" layout-align="space-between center" class="time-in-goal">
+            <label>Time in Goal</label>
+            <span>{{item.time_in_goal}} {{item.time_in_goal >1 ? 'days' : 'day'}}</span>
+          </div>
+          <div layout="row" layout-align="space-between center" ng-if="item.weight > 0">
+            <label>Goal Weight</label>
+            <span>{{item.weight}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="time-at">{{item.date}}</div>
+    </li>
+  </ul>
+</div>

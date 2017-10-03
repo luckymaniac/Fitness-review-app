@@ -9,6 +9,7 @@ import ClientInfo from './client-info';
 import PlanEdit from './plan-edit';
 import MessageEditor from './message-editor';
 import WeightChart from './weight-chart';
+import Timeline from './timeline';
 
 let componentModule = angular.module('app.components', [
   Logo,
@@ -19,7 +20,8 @@ let componentModule = angular.module('app.components', [
   ClientInfo,
   PlanEdit,
   MessageEditor,
-  WeightChart
+  WeightChart,
+  Timeline
 ])
   
 .name;
