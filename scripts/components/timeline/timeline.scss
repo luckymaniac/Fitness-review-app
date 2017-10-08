@@ -29,7 +29,7 @@
       .desc {
         position: absolute;
         width: 180px;
-        top: -60px;
+        top: -80px;
         right: 0;
         transform: translateX(50%);
         font-size: 13px;
@@ -44,6 +44,16 @@
 
           label {
             color: $high-text-color;
+            font-weight: 400;
+          }
+        }
+
+        .average-calories {
+          padding: 5px 0;
+          font-size: 12px;
+
+          label {
+            color: $medium-text-color;
             font-weight: 400;
           }
         }
