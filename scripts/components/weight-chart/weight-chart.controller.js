@@ -72,6 +72,7 @@ class WeightChartController {
         label: 'Calorie',
         borderWidth: 2,
         type: 'line',
+        fill: false,
         yAxisID: 'y-axis-calorie'
       }
     ];
