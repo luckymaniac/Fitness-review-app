@@ -12,9 +12,10 @@ class WeightChartController {
   }
 
   init() {
-    this.colors = ['#45b7cd', '#900090'];
+    this.colors = ['#45b7cd', '#900090', '#EB5446'];
 
     this.data = [
+      [],
       [],
       []
     ];
@@ -26,19 +27,52 @@ class WeightChartController {
         point: {
           radius: 0
         }
+      },
+      scales: {
+        yAxes: [
+          {
+            id: 'y-axis-weight',
+            type: 'linear',
+            display: true,
+            position: 'left',
+            scaleLabel: {
+              display: true,
+              labelString: 'Weight'
+            }
+
+          },
+          {
+            id: 'y-axis-calorie',
+            type: 'linear',
+            display: true,
+            position: 'right',
+            scaleLabel: {
+              display: true,
+              labelString: 'Calorie'
+            }
+          }
+        ]
       }
     };
 
     this.dataset = [
       {
-        label: "Weight",
+        label: 'Weight',
         borderWidth: 1,
-        type: 'line'
+        type: 'line',
+        yAxisID: 'y-axis-weight'
       },
       {
         label: "Goal",
         borderWidth: 1,
-        type: 'line'
+        type: 'line',
+        yAxis: 1
+      },
+      {
+        label: 'Calorie',
+        borderWidth: 2,
+        type: 'line',
+        yAxisID: 'y-axis-calorie'
       }
     ];
   }
@@ -86,6 +120,7 @@ class WeightChartController {
         this.labels.push(date);
         this.data[0].push(myWeight);
         this.data[1].push(goalWeight);
+        this.data[2].push(_.get(trend_record, 'calories_burned', 0));
       }
 
       let ddd = date.split('-');
