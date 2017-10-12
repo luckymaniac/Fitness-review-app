@@ -16,7 +16,8 @@ class GoalChangesController {
       sort: 'client_goals.updated_at',
       search: null,
       scope: 'goal_losers',
-      membership: null
+      membership: null,
+      goal_id: null
     };
     this.total = 0;
 

@@ -9,6 +9,15 @@
       </div>
       <div flex="60" layout layout-align="end">
         <md-input-container>
+          <md-select ng-model="$ctrl.query.goal_id" 
+                    md-on-close="$ctrl.load()"
+                    aria-label="scope">
+            <md-option ng-value="null">Show all</md-option>
+            <md-option ng-repeat="item in $ctrl.goals" ng-value="{{item.id}}">{{item.description}}</md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container>
           <md-select ng-model="$ctrl.query.membership" 
                     md-on-close="$ctrl.load()"
                     aria-label="scope">
