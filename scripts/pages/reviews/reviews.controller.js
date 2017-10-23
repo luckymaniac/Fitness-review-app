@@ -1,6 +1,7 @@
 class ReviewsController {
-  constructor(MacroReview, Auth, Goal) {
+  constructor($httpParamSerializer, MacroReview, Auth, Goal) {
     window._$ctrl = this;
+    this._$httpParamSerializer = $httpParamSerializer;
     this._MacroReview = MacroReview;
     this._Auth = Auth;
     this._Goal = Goal;
@@ -17,6 +18,11 @@ class ReviewsController {
       goal_scope: null,
       auto_scope: null
     };
+
+    this.nextReviewParams = {
+      onlyGoalHitters: false
+    };
+
     this.total = 0;
 
     this.goals = [];
@@ -79,8 +85,24 @@ class ReviewsController {
     }
     return result;
   }
+
+  nextReview() {
+    let options = {};
+
+    const goal = _.find(this.goals, {id: parseInt(this.query.goal_scope)});
+    if (goal) {
+      options['goalType'] = goal.description;
+    }
+
+    if (this.nextReviewParams.onlyGoalHitters) {
+      options['onlyGoalHitters'] = true;
+    }
+
+    const qs = this._$httpParamSerializer(options);
+    return `https://reviews.eattoperform.com/reviews/next?${qs}`;
+  }
 }
 
-ReviewsController.$inject = ['MacroReview', 'Auth', 'Goal'];
+ReviewsController.$inject = ['$httpParamSerializer', 'MacroReview', 'Auth', 'Goal'];
 
 export default ReviewsController;

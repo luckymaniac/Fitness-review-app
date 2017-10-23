@@ -13,6 +13,9 @@
                   ng-click="$ctrl.update()"
                   ng-disabled="!$ctrl.isPlanUpdatable()">{{$ctrl.plan.id ? "Update" : "Create"}}</md-button>
       </div>
+      <div flex layout="row">
+        <a class="md-warn md-raised md-button" ng-href="https://reviews.eattoperform.com/clients/{{$ctrl.client.id}}/escalated-reviews" target="_blank">Escalate Review</a>
+      </div>
       <span ng-click="$ctrl.toggle()" class="toggle">
         <i class="material-icons" ng-show="!$ctrl.isExpanded">keyboard_arrow_down</i>
         <i class="material-icons" ng-show="$ctrl.isExpanded">keyboard_arrow_up</i>

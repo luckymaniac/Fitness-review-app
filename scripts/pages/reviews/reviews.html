@@ -7,19 +7,25 @@
       <div flex="20">
         <etp-simple-search ng-model="$ctrl.query.search" on-search="$ctrl.onSearch()"></etp-simple-search>
       </div>
-      <div flex="40" flex-offset="40" layout="row" layout-align="end center">
-        <md-select ng-model="$ctrl.query.scope" md-on-close="$ctrl.load()" aria-label="scope" flex="30">
-          <md-option value="null">All</md-option>
+      <div flex="60" flex-offset="20" layout="row" layout-align="end center">
+        <md-checkbox ng-model="$ctrl.nextReviewParams.onlyGoalHitters" aria-label="Only Goal Hitters">
+          Only Goal Hitters
+        </md-checkbox>
+
+        <a class="etp-primary-button md-raised md-button" ng-href="{{$ctrl.nextReview()}}" target="_blank" flex="15" flex-offset="5">Next Review</a>
+
+        <md-select ng-model="$ctrl.query.scope" md-on-close="$ctrl.load()" aria-label="scope" flex="15" flex-offset="5">
+          <md-option ng-value="null">All</md-option>
           <md-option value="pending">Pending</md-option>
           <md-option value="reviewed">Reviewed</md-option>
         </md-select>
 
-        <md-select ng-model="$ctrl.query.goal_scope" md-on-close="$ctrl.load()" aria-label="scope" flex="30" flex-offset="5">
+        <md-select ng-model="$ctrl.query.goal_scope" md-on-close="$ctrl.load()" aria-label="scope" flex="15" flex-offset="5">
           <md-option value="null">All</md-option>
           <md-option ng-repeat="item in $ctrl.goals" value="{{item.id}}">{{item.description}}</md-option>
         </md-select>
 
-        <md-select ng-model="$ctrl.query.auto_scope" md-on-close="$ctrl.load()" aria-label="scope" flex="30" flex-offset="5">
+        <md-select ng-model="$ctrl.query.auto_scope" md-on-close="$ctrl.load()" aria-label="scope" flex="15" flex-offset="5">
           <md-option value="null">All</md-option>
           <md-option value="auto">Auto Reviews</md-option>
           <md-option value="non-auto">Nonauto Reviews</md-option>
