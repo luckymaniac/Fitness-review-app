@@ -1,6 +1,6 @@
 const AppConstants = {
-  api: 'http://35.163.77.181/api/coaches',
-  public_api: 'http://35.163.77.181/api/public',
+  api: 'https://app.eattoperform.com/api/coaches',
+  public_api: 'https://app.eattoperform.com/api/public',
   appName: 'Eat To Perform',
   appKey: '35.163.77.181.coach',
   trend_max_data: {
